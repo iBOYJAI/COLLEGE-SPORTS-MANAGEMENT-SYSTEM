@@ -1,0 +1,218 @@
+/**
+ * College Sports Management System
+ * Responsive Design - Mobile, Tablet, Desktop
+ */
+
+/* ===== TABLET (768px and below) ===== */
+@media (max-width: 768px) {
+
+    /* Header adjustments*/
+    .header {
+        padding: 0 var(--space-4);
+    }
+
+    .header-title {
+        font-size: var(--font-size-lg);
+    }
+
+    /* Sidebar - hide by default on mobile, show with toggle */
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform var(--transition-base);
+    }
+
+    .sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    /* Content spacing reduction */
+    .content-wrapper {
+        padding: var(--space-4);
+    }
+
+    .page-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    /* Grid adjustments */
+    .grid-cols-2,
+    .grid-cols-3,
+    .grid-cols-4 {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Filter bar - stack vertically */
+    .filter-bar {
+        flex-direction: column;
+    }
+
+    .filter-group,
+    .search-box {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    /* Table - horizontal scroll */
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table {
+        min-width: 600px;
+    }
+
+    /* Modal - full width on mobile */
+    .modal-content {
+        width: 95%;
+        max-height: 95vh;
+    }
+
+    /* Buttons - full width on mobile */
+    .btn-mobile-full {
+        width: 100%;
+    }
+
+    /* Cards - adjust padding */
+    .card-body {
+        padding: var(--space-4);
+    }
+
+    /* Hide text on smaller screens */
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+/* ===== MOBILE (576px and below) ===== */
+@media (max-width: 576px) {
+
+    /* Further reduce spacing */
+    .content-wrapper {
+        padding: var(--space-3);
+    }
+
+    .page-header {
+        margin-bottom: var(--space-4);
+    }
+
+    .page-title {
+        font-size: var(--font-size-xl);
+    }
+
+    /* Stack stat cards */
+    .stat-card {
+        padding: var(--space-4);
+    }
+
+    .stat-value {
+        font-size: var(--font-size-3xl);
+    }
+
+    /* Reduce font sizes */
+    h1 {
+        font-size: var(--font-size-3xl);
+    }
+
+    h2 {
+        font-size: var(--font-size-2xl);
+    }
+
+    h3 {
+        font-size: var(--font-size-xl);
+    }
+
+    /* Button groups stack vertically */
+    .modal-footer {
+        flex-direction: column-reverse;
+    }
+
+    .modal-footer .btn {
+        width: 100%;
+    }
+}
+
+/* ===== TABLET LANDSCAPE (992px and below) ===== */
+@media (max-width: 992px) {
+
+    .grid-cols-3,
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ===== LARGE DESKTOP (1400px and above) ===== */
+@media (min-width: 1400px) {
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+
+    .sidebar,
+    .header,
+    .btn,
+    .filter-bar,
+    .pagination {
+        display: none !important;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .content-wrapper {
+        padding: 0;
+    }
+
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+
+    /* Ensure text is black for printing */
+    body {
+        color: #000;
+        background: #fff;
+    }
+}
+
+/* ===== UTILITY CLASSES FOR RESPONSIVE ===== */
+.show-mobile {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .show-mobile {
+        display: block !important;
+    }
+
+    .show-mobile.d-flex {
+        display: flex !important;
+    }
+}
+
+.hide-desktop {
+    display: none !important;
+}
+
+@media (min-width: 769px) {
+    .hide-desktop {
+        display: block !important;
+    }
+}
