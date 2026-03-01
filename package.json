@@ -1,0 +1,21 @@
+{
+  "name": "college-sports-management-screenshots",
+  "version": "1.0.0",
+  "description": "Automated screenshot capture for College Sports Management System",
+  "main": "screenshot-automation.js",
+  "scripts": {
+    "screenshot": "node screenshot-automation.js",
+    "screenshot:headless": "node screenshot-automation.js --headless",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "puppeteer",
+    "screenshots",
+    "automation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^23.11.1"
+  }
+}

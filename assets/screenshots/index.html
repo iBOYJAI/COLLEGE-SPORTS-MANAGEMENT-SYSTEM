@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenshot Gallery - College Sports Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 15px 30px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            background: #e0e0e0;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .toggle-btn {
+            padding: 12px 30px;
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .toggle-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .screenshot-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .screenshot-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .screenshot-info {
+            padding: 20px;
+        }
+
+        .screenshot-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .screenshot-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .screenshot-type {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            overflow: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 95%;
+            max-height: 95%;
+            margin: auto;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close:hover {
+            color: #667eea;
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 20px;
+            user-select: none;
+            transition: 0.3s;
+        }
+
+        .modal-nav:hover {
+            color: #667eea;
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📸 Screenshot Gallery</h1>
+        <p class="subtitle">College Sports Management System - Complete Visual Documentation</p>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">74</div>
+                <div class="stat-label">Total Screenshots</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">37</div>
+                <div class="stat-label">Unique Pages</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2</div>
+                <div class="stat-label">User Roles</div>
+            </div>
+        </div>
+
+        <div class="view-toggle">
+            <button class="toggle-btn active" onclick="switchView('viewport')">📱 Viewport View</button>
+            <button class="toggle-btn" onclick="switchView('full-height')">📄 Full Height View</button>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('all')">All Pages (37)</button>
+            <button class="tab" onclick="switchTab('common')">Common (1)</button>
+            <button class="tab" onclick="switchTab('admin')">Admin (24)</button>
+            <button class="tab" onclick="switchTab('staff')">Staff (12)</button>
+        </div>
+
+        <div id="all" class="section active">
+            <div class="section-title">All Pages</div>
+            <div class="gallery" id="gallery-all"></div>
+        </div>
+
+        <div id="common" class="section">
+            <div class="section-title">Common Pages</div>
+            <div class="gallery" id="gallery-common"></div>
+        </div>
+
+        <div id="admin" class="section">
+            <div class="section-title">Admin Pages</div>
+            <div class="gallery" id="gallery-admin"></div>
+        </div>
+
+        <div id="staff" class="section">
+            <div class="section-title">Staff Pages</div>
+            <div class="gallery" id="gallery-staff"></div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Generated:</strong> March 2, 2026 | <strong>Automation Tool:</strong> Puppeteer</p>
+            <p>College Sports Management System © 2026</p>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="modal-nav modal-prev" onclick="navigateModal(-1)">&#10094;</span>
+        <img class="modal-content" id="modal-img">
+        <span class="modal-nav modal-next" onclick="navigateModal(1)">&#10095;</span>
+    </div>
+
+    <script>
+        let currentView = 'viewport';
+        let currentImageIndex = 0;
+        let currentImages = [];
+
+        const screenshots = [
+            { num: '01', name: 'Login Page', category: 'common' },
+            { num: '02', name: 'Admin Dashboard', category: 'admin' },
+            { num: '03', name: 'Manage Users', category: 'admin' },
+            { num: '04', name: 'Add User', category: 'admin' },
+            { num: '05', name: 'Manage Sports', category: 'admin' },
+            { num: '06', name: 'Add Sport', category: 'admin' },
+            { num: '07', name: 'Manage Teams', category: 'admin' },
+            { num: '08', name: 'Add Team', category: 'admin' },
+            { num: '09', name: 'Team Roster', category: 'admin' },
+            { num: '10', name: 'Manage Players', category: 'admin' },
+            { num: '11', name: 'Add Player', category: 'admin' },
+            { num: '12', name: 'View Player', category: 'admin' },
+            { num: '13', name: 'Manage Matches', category: 'admin' },
+            { num: '14', name: 'Schedule Match', category: 'admin' },
+            { num: '15', name: 'View Results', category: 'admin' },
+            { num: '16', name: 'Enter Results', category: 'admin' },
+            { num: '17', name: 'Reports', category: 'admin' },
+            { num: '18', name: 'Analytics', category: 'admin' },
+            { num: '19', name: 'Performance Tracking', category: 'admin' },
+            { num: '20', name: 'Player Statistics', category: 'admin' },
+            { num: '21', name: 'Calendar', category: 'admin' },
+            { num: '22', name: 'Notifications', category: 'admin' },
+            { num: '23', name: 'Generate Certificate', category: 'admin' },
+            { num: '24', name: 'Profile', category: 'admin' },
+            { num: '25', name: 'Settings', category: 'admin' },
+            { num: '26', name: 'Staff Dashboard', category: 'staff' },
+            { num: '27', name: 'View Teams', category: 'staff' },
+            { num: '28', name: 'Team Roster', category: 'staff' },
+            { num: '29', name: 'View Players', category: 'staff' },
+            { num: '30', name: 'View Player', category: 'staff' },
+            { num: '31', name: 'View Matches', category: 'staff' },
+            { num: '32', name: 'View Results', category: 'staff' },
+            { num: '33', name: 'Enter Scores', category: 'staff' },
+            { num: '34', name: 'View Reports', category: 'staff' },
+            { num: '35', name: 'Generate Certificate', category: 'staff' },
+            { num: '36', name: 'Profile', category: 'staff' },
+            { num: '37', name: 'Settings', category: 'staff' }
+        ];
+
+        function getFileName(num, category) {
+            const names = {
+                '01': 'login-page',
+                '02': 'admin-dashboard',
+                '03': 'admin-manage-users',
+                '04': 'admin-add-user',
+                '05': 'admin-manage-sports',
+                '06': 'admin-add-sport',
+                '07': 'admin-manage-teams',
+                '08': 'admin-add-team',
+                '09': 'admin-team-roster',
+                '10': 'admin-manage-players',
+                '11': 'admin-add-player',
+                '12': 'admin-view-player',
+                '13': 'admin-manage-matches',
+                '14': 'admin-schedule-match',
+                '15': 'admin-view-results',
+                '16': 'admin-enter-results',
+                '17': 'admin-reports',
+                '18': 'admin-analytics',
+                '19': 'admin-performance-tracking',
+                '20': 'admin-player-statistics',
+                '21': 'admin-calendar',
+                '22': 'admin-notifications',
+                '23': 'admin-generate-certificate',
+                '24': 'admin-profile',
+                '25': 'admin-settings',
+                '26': 'staff-dashboard',
+                '27': 'staff-view-teams',
+                '28': 'staff-team-roster',
+                '29': 'staff-view-players',
+                '30': 'staff-view-player',
+                '31': 'staff-view-matches',
+                '32': 'staff-view-results',
+                '33': 'staff-enter-scores',
+                '34': 'staff-view-reports',
+                '35': 'staff-generate-certificate',
+                '36': 'staff-profile',
+                '37': 'staff-settings'
+            };
+            return names[num];
+        }
+
+        function renderGallery(category = 'all') {
+            const filtered = category === 'all' ? screenshots : screenshots.filter(s => s.category === category);
+            const galleryId = `gallery-${category}`;
+            const gallery = document.getElementById(galleryId);
+            
+            if (!gallery) return;
+            
+            gallery.innerHTML = '';
+            currentImages = [];
+
+            filtered.forEach((screenshot, index) => {
+                const fileName = getFileName(screenshot.num, screenshot.category);
+                const imgPath = `${currentView}/${screenshot.num}-${fileName}.png`;
+                currentImages.push(imgPath);
+
+                const card = document.createElement('div');
+                card.className = 'screenshot-card';
+                card.onclick = () => openModal(index);
+                
+                card.innerHTML = `
+                    <img src="${imgPath}" alt="${screenshot.name}" class="screenshot-img">
+                    <div class="screenshot-info">
+                        <span class="screenshot-number">#${screenshot.num}</span>
+                        <div class="screenshot-title">${screenshot.name}</div>
+                        <div class="screenshot-type">${screenshot.category.charAt(0).toUpperCase() + screenshot.category.slice(1)} • ${currentView === 'viewport' ? 'Viewport' : 'Full Height'}</div>
+                    </div>
+                `;
+                
+                gallery.appendChild(card);
+            });
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tab).classList.add('active');
+            
+            renderGallery(tab);
+        }
+
+        function switchView(view) {
+            currentView = view;
+            
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const activeTab = document.querySelector('.tab.active').textContent.toLowerCase().split(' ')[0];
+            renderGallery(activeTab);
+        }
+
+        function openModal(index) {
+            currentImageIndex = index;
+            const modal = document.getElementById('modal');
+            const modalImg = document.getElementById('modal-img');
+            
+            modal.classList.add('active');
+            modalImg.src = currentImages[index];
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        function navigateModal(direction) {
+            currentImageIndex = (currentImageIndex + direction + currentImages.length) % currentImages.length;
+            document.getElementById('modal-img').src = currentImages[currentImageIndex];
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('modal').classList.contains('active')) {
+                if (e.key === 'Escape') closeModal();
+                if (e.key === 'ArrowLeft') navigateModal(-1);
+                if (e.key === 'ArrowRight') navigateModal(1);
+            }
+        });
+
+        renderGallery('all');
+    </script>
+</body>
+</html>

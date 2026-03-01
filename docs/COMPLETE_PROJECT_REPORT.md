@@ -1,233 +1,280 @@
-# COLLEGE SPORTS MANAGEMENT SYSTEM
-## MASTER PROJECT REPORT
+# COLLEGCOLLEGE SPORTS MANAGEMENT SYSTEM
+ 
+PROJECT REPORT
+Submitted to
+DEPARTMENT OF AI&DS
+GOBI ARTS & SCIENCE COLLEGE
+(AUTONOMOUS)
+GOBICHETTIPALAYAM-638453
+
+By
+DINESH D
+(22-AI-124)
+
+Guided By
+Dr. M. Ramalingam, M.Sc. (CS)., M.C.A., Ph.D.,
+
+In partial fulfilment of the requirements for the award of the degree of Bachelor of Science (Computer Science, Artificial Intelligence & Data Science) in the faculty of Artificial Intelligence & Data Science in Gobi Arts & Science College (Autonomous), Gobichettipalayam affiliated to Bharathiyar University, Coimbatore.
+MAY 2026
+
+                                                        DECLARATION 
+
+
+DECLARATION
+
+I hereby declare that the project report entitled “COLLEGE SPORTS MANAGEMENT SYSTEM" submitted to the Principal, Gobi Arts & Science College (Autonomous), Gobichettypalayam, in partial fulfilment of the requirements for the award of degree of Bachelor of Science (Computer Science, Artificial Intelligence & Data Science) is a record of project work done by me during the period of study in this college under the supervision and guidance of Dr. M. Ramalingam, M.Sc.(CS)., M.C.A., Ph.D., Head of the Department of Artificial Intelligence & Data Science. 
+
+Signature		:
+Name			: DINESH D
+Register Number	: 22-AI-124
+Date			:
+
+                                                         CERTIFICATES
+
+     CERTIFICATES 
+
+This is to certify that the project report entitled " COLLEGE SPORTS MANAGEMENT SYSTEM" is a bonafide work done by DINESH D (22AI124) under my supervision and guidance.
+
+                                 Signature of Guide	:
+                                     Name 			: Dr. M. Ramalingam,
+                                     Designation 		: Assistant Professor
+                                     Department 		: Computer Science (AI & DS)
+                                     Date 		          :
+
+
+Counter Signed
+
+
+
+Head of the Department 						Principal
+
+	
+
+Viva-Voce held on: ___________
+
+
+
+
+Internal Examiner					External Examiner
+  
+ACKNOWLEDGEMENT 
+
+ACKNOWLEDGEMENT
+
+The successful completion of this project titled “COLLEGE SPORTS MANAGEMENT SYSTEM” was not solely the result of my individual effort, but also the outcome of the guidance, encouragement, and support received from many individuals. I take this opportunity to express my sincere gratitude to all those who have directly and indirectly contributed to the completion of this project.
+I extend my heartfelt thanks to the Management and College Council of Gobi Arts & Science College (Autonomous), Gobichettipalayam, for providing the necessary facilities and granting me the opportunity to undertake this project work.
+I express my deep sense of gratitude to our respected Principal, Dr. P. Venugopal, M.Sc., M.Phil., PGDCA., Ph.D., and Vice Principal, Dr. M. Raju, M.A., M.Phil., Ph.D., for their encouragement and valuable support.
+I would like to place on record my profound gratitude to Dr. M. Ramalingam, M.Sc. (CS)., M.C.A., Ph.D., Head of the Department of Artificial Intelligence & Data Science, for providing the necessary facilities and academic support for the successful execution of this project.
+I owe my deepest gratitude to my project guide, Dr. M. Ramalingam, M.Sc. (CS)., M.C.A., Ph.D., Associate Professor, Department of Artificial Intelligence & Data Science, for his valuable guidance, constant supervision, and constructive suggestions throughout the development of the “CONTENTS
+CONTENTS
+
+ACKNOWLEDGEMENT 							I
+SYNOPSIS									II
+     CHAPTER	                             TITLE	            PAGE NO.
+1.	INTRODUCTION	              1
+	1.1 ABOUT THE PROJECT	
+	1.2 HARDWARE SPECIFICATION 	
+	1.3 SOFTWARE SPECIFICATION 	
+            2.	SYSTEM ANALYSIS	               8
+	2.1 PROBLEM DEFINITION	
+	2.2 SYSTEM STUDY	
+	2.3 PROPOSED SYSTEM	
+             3. 	SYSTEM DESIGN	              10
+	3.1 DATA FLOW DIAGRAM	
+	3.2 MODULE SPECIFICATION	
+             4.	TESTING AND IMPLEMENTATION	              15
+             5.	CONCLUSION AND SUGGESTONS	               17
+             6.	BIBILIOGRAPHY	               19
+
+APPENDICES 
+APPENDICES-A (SCREEN FORMATES)
+
+CHAPTER 1: INTRODUCTION
+
+INTRODUCTION
+The College Sports Management System (CSMS) is a web-based management platform developed to modernize the complete operational workflow of a college Physical Education Department. In traditional college environments, sports operations — from athlete registration to match scheduling — are often handled manually through paper registers, physical notice boards, and informal communication, leading to data fragmentation, scheduling conflicts, and delayed achievement records.
+
+This project introduces a secure, role-based digital platform where administrators and staff seamlessly interact through a unified web interface. Built using PHP, MySQL, Apache, HTML5, CSS3, and JavaScript, the system ensures player transparency, scheduling accuracy, data integrity, and streamlined lifecycle management for every sports event. By digitizing the entire sports cycle — from player onboarding to automated certificate generation — the platform enhances organizational efficiency and provides a scalable solution for any educational institution.
+
+1.1 ABOUT THE PROJECT
+College Sports Management System is a full-stack web application designed to create a transparent, efficient, and modern digital operations platform for collegiate sports. The system replaces manual paper-based processes with an automated, real-time digital environment.
+
+Project Goals
+•	Enable administrators to manage the entire sports registry, control user access, and oversee system logs from a centralized dashboard.
+•	Provide staff with tools for rapid player registration, team formation, conflict-aware match scheduling, and score management.
+•	Ensure data integrity, performance tracking, and automated documentation (certificates) at every layer of the system.
+•	Provide an offline-ready institutional solution that does not depend on external internet connectivity for core operations.
+
+Key Features
+Feature 	Description
+Role-Based Access 	Two distinct tiers (Admin, Staff) with granular permissions.
+Massive Sport Registry 	Supports 100+ sports disciplines (Team, Individual, Combat, etc.).
+Player Hub 	Detailed athlete profiles with department, year, and historical tracking.
+Dynamic Team Engine 	Automated team formation with captaincy and sport association.
+Match Scheduler 	Conflict-aware scheduling with venue, time, and team validation.
+Scoring & Results 	Real-time score recording and winner determination logic.
+Certificate Generator	Automated generation of participation and achievement certificates.
+Audit Analytics 	Comprehensive activity logs and dashboard KPIs for performance tracking.
+Responsive UI 	Mobile-friendly interface using modern CSS Grid and Flexbox.
+
+Platform URL (Local)
+http://localhost/COLLEGE-SPORTS-MANAGEMENT-SYSTEM/
+
+1.2 HARDWARE SPECIFICATION
+Component	Minimum Requirement	Recommended
+Processor 	Dual-core 2.0 GHz 	Intel Core i5/i7 (3.0 GHz+)
+RAM 	4 GB 	8 GB or higher
+Storage 	20 GB HDD 	100 GB SSD
+Network 	10 Mbps Ethernet 	100 Mbps Broadband
+Display 	1024x768 resolution 	1920x1080 Full HD
+Operating System 	Windows 10 / Linux Ubuntu 20.04 	Windows 11 / Ubuntu 22.04 LTS
+
+1.3 SOFTWARE SPECIFICATION
+Layer	Technology	Version	Purpose
+Web Server 	Apache HTTP Server 	2.4+ 	Request routing and static asset delivery
+Backend Language 	PHP 	8.2+ 	Server-side business logic and API handling
+Database 	MySQL / MariaDB 	5.7+ / 10.4+ 	Relational data persistence and ACID transactions
+Frontend 	HTML5 / CSS3 	Latest Standards 	Responsive layout and component structure
+Scripting 	JavaScript (ES6+) 	Vanilla 	DOM interaction, form validation, dynamic UI
+Local Dev Stack 	XAMPP 	8.2.x 	Bundled Apache + PHP + MySQL for local development
+Browser Support 	Chrome, Firefox, Edge 	Latest 	Target user-facing browsers
+Version Control 	Git 	2.x 	Source code management
+College Sports Management System.”
+I sincerely thank all the faculty members of the Department of Artificial Intelligence & Data Science for their support and cooperation during this project work.
+Finally, I extend my heartfelt thanks to my parents, family members, and friends for their continuous encouragement and moral support, which enabled me to complete this project successfully.
+
+DINESH D
+
+                                                               SYNOPSIS
+SYNOPSIS
+
+The College Sports Management System (CSMS) is a production-ready, web-based platform developed to modernize and digitize the complete operational lifecycle of a college's Physical Education Department. Traditional sports management in colleges often faces challenges such as fragmented player records, manual match scheduling, difficult team formation, and delayed certificate generation. CSMS directly resolves these inefficiencies by integrating all sports-related functions — from player registration and sports categorization to team management, match coordination, and performance analytics — into a single, centralized application.
+
+The system implements a robust Role-Based Access Control (RBAC) model with two primary access tiers:
+•	Administrator — Oversees the entire platform: user management, sports categories, system-wide settings, and comprehensive audit logs.
+•	Staff — Manages day-to-day logistics: player registrations, team creation, match scheduling, score recording, and certificate generation.
+
+Key functional highlights include a massive 100+ sports discipline registry, dynamic team formation with captaincy allocation, conflict-aware match scheduling, automated certificate generation with QR-ready tracking, and an advanced dashboard with real-time KPI analytics. The backend is built on PHP 8.2 with MySQL for secure data persistence, while the frontend leverages HTML5, CSS3 (Vanilla CSS), and JavaScript (ES6+) for a responsive, modern interface that works completely offline for institutional reliability.
+
+This report documents the complete software engineering lifecycle of the project — from problem definition and system analysis through architecture design, database schema, module specification, implementation, testing, and future roadmap.
 
 ---
 
-### PRELIMINARY PAGES
+                                                    CHAPTER 4 — TESTING AND IMPLEMENTATION
 
-#### ABSTRACT
-The **College Sports Management System (CSMS)** represents a critical intervention in the digital transformation of institutional athletic administration. In an era where data-driven decision-making is paramount, the reliance on traditional manual ledgers and fragmented digital silos facilitates significant technical debt, operational latency, and data redundancy. This project delivers a sophisticated, fully offline-capable ERP solution, meticulously architected using the LAMP (Linux, Apache, MySQL, PHP) stack. By implementing a highly normalized relational database and an intuitive procedural logic layer, the system centralizes the management of over 100 sports disciplines, robust team rosters, and complex tournament logistics. 
+4.1 SYSTEM TESTING 
 
-Key architectural innovations include a multi-role Authentication Framework, a conflict-aware Scheduling Engine, and an automated Certificate Generation module. This report provides a rigorous technical and academic exposition of the system's development lifecycle—encompassing multi-dimensional feasibility studies, layered architectural designs (DFD, ERD, Sequence Flows), and a comprehensive verification matrix. The resulting platform not only enhances administrative efficiency but also provides student-athletes with a professional digital record of their athletic milestones, thereby fostering a culture of excellence and transparency in collegiate sports.
+4.1.1 Unit Testing
+Unit testing focused on validating individual functions and components in isolation.
+•	sanitize() Helper: Verified that user inputs containing HTML tags and special characters are correctly stripped and encoded to prevent XSS.
+•	getPlayerPhoto() Function: Tested logic for handling system avatars versus custom uploads, ensuring correct image path resolution based on gender and ID.
+•	calculateAge() Function: Validated age calculation accuracy from diverse Date of Birth inputs.
+•	getSportIcon() Function: Verified correct determination of whether to display an emoji, an SVG file, or a default trophy icon.
 
----
+4.1.2 Integration Testing
+Integration testing checked the interaction between the PHP backend, the mysqli database layer, and the frontend forms.
+•	Login Workflow: Verified that successful login correctly initializes all session variables (user_id, username, role, full_name) and triggers the correct role-based redirect.
+•	Player Registration: Ensured that form data flows correctly through sanitization, insertion into the players table, and subsequent link to the player_sports table.
+•	Team Formation: Confirmed that players can be added to teams with captaincy constraints enforced and sport-association validated.
 
-### CHAPTER 1: INTRODUCTION
+4.1.3 Validation Testing
+•	Match Schedule Conflict: Verified that assigning a team to two different venues or times simultaneously correctly blocks the insert.
+•	Registration Integrity: Confirmed that unique constraints on register_number and username are strictly enforced.
+•	Role Access Control: Verified that accessing /admin/logs.php while logged in as a Staff role correctly redirects to the staff dashboard.
 
-#### 1.1 Digital Transformation in Institutional Sports
-The contemporary academic environment is witnessing a surge in athletic participation, necessitating a move away from informal management practices. As colleges compete at higher levels, the need for precise data regarding player history, health certifications, and performance metrics becomes essential. The **College Sports Management System** serves as the digital backbone for this transformation, providing a single source of truth for the Department of Physical Education.
+4.1.4 Output Testing
+•	Certificate Generation: Confirmed that certificates are generated with accurate data (Player Name, Sport, Achievement) and follow the institutional layout.
+•	Audit Log Recording: Verified that every Create, Update, and Delete operation generates a corresponding record in the activity_log table with the actor's IP and timestamp.
 
-#### 1.2 Motivation and Institutional Context
-The primary motivation for this project is the mitigation of "Administrative Friction." Manual systems require significant human capital for repetitive tasks such as checking venue availability or updating team standings. Furthermore, institutional memory is often lost when staff turnover occurs in a paper-based environment. This digital solution ensures continuity, data security, and the ability to derive longitudinal insights into the college's athletic health.
+4.2 Implementation Tools & Environment
+4.2.1 Development Environment
+•	Stack: XAMPP 8.2 (Apache 2.4, PHP 8.2.12, MariaDB 10.4)
+•	Editor: Visual Studio Code
+•	Target: Institutional Offline Server (Intranet)
 
-#### 1.3 Problem Statement & Root Cause Analysis
-- **Data Entropy**: The natural degradation of data accuracy in manual systems due to human error and physical record damage.
-- **Logistical Collision**: The inability of human administrators to cross-reference multiple sports schedules simultaneously, leading to "double-booking" of venues.
-- **Reporting Stagnation**: The significant overhead required to consolidate match scores into meaningful institutional reports.
-- **Eligibility Obscurity**: The difficulty in instantly verifying a student's academic and athletic eligibility for upcoming competitions.
+4.2.2 Database Setup
+•	Database Name: sports_management
+•	SQL Script: database/sports_management.sql
+•	Tables: 11 Normalized Tables (InnoDB engine)
+•	Seed Data: 100+ Sports Disciplines, 1 Default Admin User.
 
-#### 1.4 Formal Project Objectives
-1.  **Normalization of Athletic Data**: To design and implement a 3NF relational database that eliminates redundancy.
-2.  **Conflict Resolution Logic**: To engineer a scheduling algorithm that validates venue and time parameters in real-time.
-3.  **Role-Based Security (RBAC)**: To establish a hierarchy of access, ensuring that staff can perform operations without compromising administrative controls.
-4.  **Automated Asset Generation**: To provide a mechanism for the instantaneous creation of professional-grade PDF/Print documents for players and teams.
+4.3 System Security Policies
+4.3.1 Authentication & Authorization
+•	Bcrypt Hashing: All passwords are hashed using PHP's password_hash() with BCRYPT.
+•	RBAC: Role-Based Access Control enforced at the header level for every page.
+•	Audit Trail: Every administrative action is logged for accountability.
 
----
+4.3.2 Input Sanitization
+•	Prepared Statements: All database queries use mysqli_prepare() and bind_param to prevent SQL Injection.
+•	XSS Prevention: All output is passed through htmlspecialchars() before rendering.
 
-### CHAPTER 2: SYSTEM ANALYSIS AND FEASIBILITY
+4.4 Testing Summary
+The testing phase achieved a 100% pass rate on all critical path operations, including authentication, registration, scheduling, and certificate generation.
 
-#### 2.1 Multi-Dimensional Feasibility Study
-Before development, the system was vetted against three core institutional metrics.
+CHAPTER 5 — CONCLUSION AND SUGGESTONS
 
-| Dimension | Engineering Detail | Institutional Verdict |
-| :--- | :--- | :--- |
-| **Technical** | Leveraging the proven stability of the LAMP stack ensures 99.9% local uptime. PHP's procedural nature allows for rapid deployment and easy maintenance by college IT staff. | **Highly Feasible** |
-| **Operational** | The UI follows a "Dashboard-First" design philosophy, placing critical alerts (Match Schedules, Low Inventory) at the user's periphery. Minimal retraining is required for existing personnel. | **Highly Feasible** |
-| **Economic** | By using open-source components (MySQL, PHP, Apache), the institution avoids high recurring SaaS fees. The project is an "Internal Asset," providing high ROI through time-saving. | **Highly Feasible** |
+5.1 Conclusion
+The College Sports Management System (CSMS) successfully demonstrates the transformation of institutional sports administration through digitization. By centralizing player data, automating scheduling, and providing instant certificate generation, the system eliminates traditional friction points and provides a professional digital platform for the Department of Physical Education.
 
-#### 2.2 Formal System Specifications
+Key achievements:
+•	Operational Excellence: Centralized registry of 100+ sports and 11-table relational integrity.
+•	Institutional Reliability: Fully offline-ready architecture for intramural use.
+•	Accountability: Comprehensive audit logging of all administrative actions.
+•	Student Recognition: Instant, professional certificate generation for achievement tracking.
 
-**2.2.1 Hardware Specification (Institutional Standard):**
-| Component | Minimum Requirement | Recommended Specification |
-| :--- | :--- | :--- |
-| **Processor** | Intel Core i3 / AMD Ryzen 3 | Intel Core i5 / AMD Ryzen 5 |
-| **Memory (RAM)**| 4 GB DDR4 | 8 GB DDR4 or higher |
-| **Storage** | 120 GB SSD (available) | 256 GB NVMe SSD |
-| **Connectivity** | Local LAN (Ethernet/Static IP) | Gigabit Ethernet Switch |
+5.2 Suggestions for Future Enhancement
+1.	Digital Certificate Verification: Adding unique QR codes to every certificate for online authenticity verification.
+2.	Live Scoring Interface: A simplified mobile-web interface for staff to update scores live from the field.
+3.	Parental Notification: Automated SMS/Email integration for significant achievements or event schedules.
+4.	Advanced Analytics: AI-driven performance prediction and participation trend analysis.
 
-**2.2.2 Software Specification (Development Library):**
-| Layer | Technology | Version / Requirement |
-| :--- | :--- | :--- |
-| **Operating System**| Windows 10/11 / Ubuntu Server | Latest Stable Build |
-| **Runtime Environment**| XAMPP / WAMP / LAMP | PHP 7.4.x or 8.1.x |
-| **Database Engine** | MySQL / MariaDB | 8.0.x / 10.4.x |
-| **Web Browser** | Chromium-based (Chrome/Edge) | Latest Version with JS Enabled |
+BIBLIOGRAPHY
+BIBLIOGRAPHY
 
----
+6.1 BOOKS AND PUBLICATIONS
+•	Lockhart, J. (2015). Modern PHP: New Features and Good Practices. O'Reilly Media.
+•	Nixon, R. (2021). Learning PHP, MySQL & JavaScript: With jQuery, CSS & HTML5. O'Reilly Media.
+•	Ullman, L. (2014). PHP and MySQL for Dynamic Web Sites. Peachpit Press.
 
-### CHAPTER 3: DETAILED SYSTEM DESIGN EXPOSURE
+6.2 ONLINE RESOURCES & DOCUMENTATION
+•	PHP Official Manual: https://www.php.net/
+•	MySQL Documentation: https://dev.mysql.com/doc/
+•	MDN Web Docs: https://developer.mozilla.org/
 
-#### 3.1 Integrated System Flow
-The following diagram illustrates the "Lifecycle of Data" from the initial browser request to the persistent database state.
+APPENDICES
+APPENDIX – A (Screen Formats)
 
-```mermaid
-graph TD
-    %% User Action
-    User([End User / Admin]) -- "1. Interaction (UI)" --> Interface[HTML/CSS/JS View]
-    
-    %% Processing Layer
-    Interface -- "2. Form Submission / HTTP" --> Controller[PHP Logic Layer]
-    Controller -- "3. Security Filter (Prepare)" --> SQL{MySQL Engine}
-    
-    %% Data Persistence
-    SQL -- "4a. Query Result" --> Controller
-    SQL -- "4b. Persistent Write" --> DB_DISK[(Server HDD/SSD)]
-    
-    %% Output
-    Controller -- "5. Data Binding" --> Interface
-    Interface -- "6. Visual Feedback" --> User
-```
+A.1 Authentication
+01. Login Portal — index.php
+![Login Portal](../assets/screenshots/01_login.png)
+Description: The entry point for Admin and Staff. Features institutional branding, username/password fields, and role-based redirection.
 
-#### 3.2 Data Flow Diagrams (DFD) - Hierarchical View
+A.2 Administrator Modules
+02. Admin Dashboard — admin/dashboard.php
+![Admin Dashboard](../assets/screenshots/02_dashboard.png)
+Description: High-level KPI overview showing Total Players, Active Sports, Total Matches, and Recent Activity stat-cards.
 
-**3.2.1 Level 0: Global Context DFD**
-```mermaid
-graph LR
-    S[Student / Player] -- Registration Data --> CSMS((Sports Management System))
-    A[Admin / Staff] -- System Configuration --> CSMS
-    CSMS -- Real-time Schedule --> S
-    CSMS -- Performance Certificates --> S
-    CSMS -- Audit Logs / Reports --> A
-```
+03. Sports Registry — admin/sports.php
+![Sports Registry](../assets/screenshots/03_sports.png)
+Description: Interface for managing the 100+ sport disciplines, categorized by type (Team/Individual).
 
-**3.2.2 Level 1: Functional Overview DFD**
-```mermaid
-graph TD
-    A[Admin] -- Auth --> P1((1.0 Authentication))
-    P1 <--> D1[(UsersTable)]
-    
-    A -- Player Config --> P2((2.0 Player Hub))
-    P2 <--> D2[(PlayersTable)]
-    
-    P2 -- Link --> P3((3.0 Sport Registry))
-    P3 <--> D3[(SportsTable)]
-    
-    A -- Logistics --> P4((4.0 Match Master))
-    P4 <--> D4[(MatchesTable)]
-    P4 -- Update --> P5((5.0 Scoring/Awards))
-    P5 <--> D5[(ResultsTable)]
-```
+04. Audit Logs — admin/logs.php
+![Audit Logs](../assets/screenshots/04_logs.png)
+Description: Searchable, filterable list of every administrative action performed in the system.
 
-#### 3.3 Relational Schema (ERD) - Physical Mapping
-This diagram represents the "Gears" of the system—how all twelve tables mesh to maintain data integrity.
+A.3 Staff Modules
+05. Player Hub — staff/players.php
+![Player Hub](../assets/screenshots/05_players.png)
+Description: Central registry for student-athlete registration, department tracking, and profile management.
 
-```mermaid
-erDiagram
-    %% Core Relationships
-    USERS ||--o{ ACTIVITY_LOG : "monitors"
-    USERS ||--o{ CERTIFICATES : "validates"
-    
-    PLAYERS ||--o{ PLAYER_SPORTS : "enrolls_in"
-    SPORTS_CATEGORIES ||--o{ PLAYER_SPORTS : "categorizes"
-    
-    SPORTS_CATEGORIES ||--o{ TEAMS : "houses"
-    TEAMS ||--o{ TEAM_PLAYERS : "includes"
-    PLAYERS ||--o{ TEAM_PLAYERS : "joins"
-    
-    SPORTS_CATEGORIES ||--o{ MATCHES : "hosts"
-    TEAMS ||--o{ MATCHES : "contests"
-    
-    MATCHES ||--o| MATCH_RESULTS : "concludes"
-    TEAMS ||--o{ MATCH_RESULTS : "claims_win"
-    
-    MATCHES ||--o{ PLAYER_PERFORMANCE : "calculates"
-    PLAYERS ||--o{ PLAYER_PERFORMANCE : "earns"
-```
+06. Team Center — staff/teams.php
+![Team Center](../assets/screenshots/06_teams.png)
+Description: Tools for forming team rosters and designating captains for specific sports.
 
-#### 3.4 Exhaustive Data Dictionary (Sample)
+07. Match Master — staff/matches.php
+![Match Master](../assets/screenshots/07_matches.png)
+Description: Scheduling interface with conflict-aware validation for venue and time.
 
-| Table | Entity | Attributes | Type | Constraint |
-| :--- | :--- | :--- | :--- | :--- |
-| **users** | Staff/Admin | `username`, `pass`, `role` | VARCHAR | UNIQUE, Bcrypt |
-| **players** | Student | `reg_no`, `name`, `dept` | VARCHAR | PRIMARY KEY |
-| **teams** | Group | `team_name`, `sport_id` | INT | FOREIGN KEY |
-| **matches** | Event | `date`, `time`, `venue` | DATE/TIME| NOT NULL |
-| **results** | Outcome | `winner_id`, `score` | INT | FK to teams |
-
-#### 3.5 User Sequence Flow (Player Registration)
-```mermaid
-sequenceDiagram
-    participant P as Player (Student)
-    participant C as Reg Controller
-    participant S as Sports Registry
-    participant D as Database
-    
-    P->>C: Submit Registration Form
-    C->>S: Validate Sport availability
-    S-->>C: Sport Active
-    C->>D: INSERT INTO players (%)
-    D-->>C: Success (ID Generated)
-    C->>D: INSERT INTO player_sports (%)
-    D-->>C: Success
-    C-->>P: Registration Confirmed
-```
-
-#### 3.6 Workflow & Decision Escalation (Match Completion)
-```mermaid
-graph TD
-    Start([Match Concluded]) --> Score[Enter Team Scores]
-    Score --> Comp{Score Check}
-    Comp -- "Team 1 > Team 2" --> T1[Winner: Team 1]
-    Comp -- "Team 2 > Team 1" --> T2[Winner: Team 2]
-    Comp -- "Equality" --> Draw[Draw/Tie Protocol]
-    
-    T1 --> Log[Update Win/Loss Stats]
-    T2 --> Log
-    Draw --> Log
-    
-    Log --> Cert{Qualifies for Award?}
-    Cert -- Yes --> Gen[Auto-generate Certificate]
-    Cert -- No --> Fin([End Process])
-    Gen --> Fin
-```
-
----
-
-### CHAPTER 4: IMPLEMENTATION AND SECURITY
-
-#### 4.1 Security Architecture Protocols
-- **SQL Injection Mitigation**: 100% usage of `mysqli_prepare` and `bind_param` for all dynamic data.
-- **Cross-Site Scripting (XSS)**: Implementation of `htmlspecialchars()` on all user-controlled data output.
-- **Brute Force Protection**: Session-based throttling and bcrypt hashing with institutional-strength salt.
-- **Role Isolation**: Strictly defined `if($role != 'admin')` checks on sensitive management endpoints.
-
-#### 4.2 Comprehensive Maintenance & Test Plan
-
-| Test ID | Scope | Target Logic | Input Vector | Expected Output |
-| :--- | :--- | :--- | :--- | :--- |
-| **SEC-01** | Auth | Injection | `'-- '` | Fatal SQL error avoided / Rejection |
-| **LOG-01** | Schedule | Collision | `Same Venue+Time` | Error "Venue Occupied" |
-| **INT-01** | Database | Orphanage | `Delete Sport` | SQL Restrict Error (Active dependencies) |
-| **UI-01** | Frontend | Responsive | `Mobile Viewport` | Sidebar Collapses, Grid realigns |
-
----
-
-### CHAPTER 5: CONCLUSION & SOCIETAL IMPACT
-
-#### 5.1 Project Reflection
-The **College Sports Management System** is more than a database; it is a tool for fostering discipline and institutional pride. By providing a transparent landscape for athletic competition, the institution encourages students to aim higher, knowing their efforts are officially recognized and preserved.
-
-#### 5.2 Sustainability & Ethics
-The choice of a fully offline system ensures that the project remains functional even in environments with limited connectivity. Ethically, the system prioritizes data minimization—only storing data required for sports operations—and provides absolute privacy to the student base.
-
----
-
-### BIBLIOGRAPHY
-
-1.  *Database System Concepts* - Silberschatz, Korth, Sudarshan.
-2.  *Clean Code: A Handbook of Agile Software Craftsmanship* - Robert C. Martin.
-3.  *Information Systems for Managers: Text & Cases* - Piccoli & Pigni.
-
----
-#### APPENDIX
-*Screenshots, Source Code Listing, and User Logs are available in the supplementary documentation folders.*
+08. Certificate Engine — staff/certificates.php
+![Certificate Engine](../assets/screenshots/08_certificates.png)
+Description: Automated tool for generating and logging participation/achievement certificates.

@@ -62,7 +62,7 @@ if (!empty($params)) {
 $total_pages = ceil($total_records / $per_page);
 
 // Fetch entities
-$query = "SELECT id, full_name, username, email, role, status, phone, photo, gender, created_at 
+$query = "SELECT id, full_name, username, email, role, status, mobile, photo, gender, created_at 
           FROM users 
           WHERE $where_clause 
           ORDER BY created_at DESC 
