@@ -160,121 +160,727 @@ This report documents the complete software engineering lifecycle of the project
 
 ---
 
+                                                    CHAPTER 2 — SYSTEM ANALYSIS
+
+2.1 Problem Definition
+In many colleges, the Physical Education (PE) Department still relies on manual and semi-digital processes for managing sports activities. Player registrations are collected on paper forms, team lists are maintained in spreadsheets, fixtures are published on notice boards, and performance records are scattered across files. This leads to several operational challenges:
+1.	Fragmented Player Records — Student-athlete details, eligibility, and participation history are not centralized, making it difficult to track long-term performance.
+2.	Manual Team Formation — Coaches and staff manually create teams, often repeating data entry and risking selection errors or missing players.
+3.	Scheduling Conflicts — Matches and practice sessions are scheduled without automated clash detection, causing venue and timing overlaps.
+4.	Poor Visibility of Sports Catalog — Information about the full list of sports offered and their categories (team/individual) is not easily accessible in one place.
+5.	Delayed Result Publication — Match scores and outcomes are compiled manually and often published late, reducing the impact of recognition.
+6.	Time-Consuming Certificate Preparation — Generating participation and achievement certificates is a manual, repetitive task that consumes significant staff time.
+7.	Lack of Analytics — There is no consolidated dashboard to view key statistics such as total players, active teams, completed matches, and overall participation trends.
+
+2.2 System Study
+Existing Approach vs Limitations
+
+Existing Approach	        Limitation
+Paper-Based Registers		Data is hard to search, prone to loss and physical damage.
+Spreadsheet-Based Lists		No relational integrity; difficult to maintain consistency across sheets.
+Notice-Board Scheduling		No automated conflict detection; updates require re-printing schedules.
+Manual Certificates		High effort for every tournament; human errors in names and events.
+Informal Communication		Important information may not reach all stakeholders in time.
+
+Stakeholder Analysis
+
+Stakeholder	Role	                 Key Needs
+Administrator	System Owner	        Complete control over users, sports catalog, teams, and audit logs.
+Staff	        Operations Executor	Quick tools for player registration, team creation, match scheduling, score entry, and certificate generation.
+Students/Players	Participants	Accurate representation of participation and achievements (through generated certificates).
+Institution Management	Decision Makers	Consolidated reporting to understand engagement, infrastructure needs, and success metrics.
+
+System Boundaries
+•	In Scope: User management (Admin/Staff), sports category management, player registry, team formation, match scheduling, score and result recording, basic player performance logging, certificate generation, and activity logging.
+•	Out of Scope: Online public portal, mobile applications, fee/payment collection, advanced performance analytics using AI, and integration with external federations.
+
+2.3 Proposed System
+The proposed College Sports Management System replaces fragmented manual workflows with a centralized, role-based web application hosted on the institutional intranet.
+
+Key Characteristics of the Proposed System:
+•	Centralized sports registry with 100+ predefined disciplines.
+•	Formal player registration with department, year, and demographic fields.
+•	Team formation tied to sports categories with coach assignment and captaincy.
+•	Conflict-aware match scheduling by sport, venue, date, and time.
+•	Structured recording of match results and individual player performance.
+•	Automated certificate generation with archived logs.
+•	Institution-ready audit logging of all critical operations.
+
+Benefits Over Existing Approach:
+•	Faster operations (registration, scheduling, and certificate issue).
+•	Reduced data duplication and greater consistency.
+•	Instant visibility into active players, teams, and matches.
+•	Better institutional memory via digital audit logs and historical records.
+
+
+
+                                                    CHAPTER 3 — SYSTEM DESIGN
+
+3.1 Data Flow Diagram (DFD)
+The logical flow of data in CSMS can be represented with the following levels:
+
+DFD Level 0 — Context Diagram
+•	External Entities: Administrator, Staff.
+•	System: College Sports Management System.
+•	Major Data Flows: Login credentials, player data, team data, match details, performance statistics, certificates, and reports.
+
+DFD Level 1 — Major Processes
+1.	User Management — Handles authentication, authorization, and user profile maintenance.
+2.	Player Registry — Manages student-athlete records and their associated sports.
+3.	Team Management — Manages team creation, membership, and captain designation.
+4.	Match Scheduling — Handles fixture creation with date, time, and venue.
+5.	Scoring & Results — Records match scores and determines winners/draws.
+6.	Certificate Engine — Generates and logs certificates for participation and achievement.
+7.	Audit & Reporting — Tracks activities and compiles summary statistics.
+
+DFD Level 2 — Match Management Sub-process
+•	Schedule Match → Validate Teams & Venue → Save Match → Update Dashboard.
+•	Enter Scores → Calculate Outcome → Update Standings → Generate Result Logs.
+
+3.2 E–R Diagram (Conceptual Overview)
+The high-level entity-relationship view of the system includes the following entities and relationships:
+•	Users (Admin/Staff)
+•	Players
+•	Sports Categories
+•	Player Sports (mapping players to sports)
+•	Teams
+•	Team Players (mapping players to teams)
+•	Matches
+•	Match Results
+•	Player Performance
+•	Certificates
+•	Activity Log
+
+Relationships (Simplified):
+•	One User generates many Certificates and Activity Logs.
+•	One Player can participate in many Sports (many-to-many via player_sports).
+•	One Sport can contain many Teams and Matches.
+•	One Team has many Players (many-to-many via team_players).
+•	One Match has one Match Result and many Player Performance records.
+•	One Player can own many Certificates.
+
+3.3 File Specification
+This section documents the key physical components of the CSMS application.
+
+Root-Level Files
+File	        Type	Purpose
+index.php	PHP	Login portal and entry point for Admin and Staff.
+logout.php	PHP	Secure session termination and redirect to login.
+config.php	PHP	Global configuration: database connection, helper functions, paths, and security utilities.
+README.md	Markdown	Developer-facing overview and installation guide.
+SCREENSHOT_README.md	Markdown	Technical guide for automated screenshot capture.
+
+Configuration & Shared Components
+Directory/File	        Purpose
+includes/header.php	Common HTML header, top-bar, CSS/JS references, and session context.
+includes/sidebar.php	Left navigation sidebar (role-aware menus for Admin and Staff).
+includes/footer.php	Common footer and closing script references.
+includes/icons.php	Application-wide icon registry used for dashboards and UI elements.
+includes/team_helpers.php	Helper functions for team and roster rendering.
+
+Application Modules
+Directory/File	        Role/Purpose
+admin/dashboard.php	Admin dashboard with KPI cards, analytics bento grid, and real-time stats fetched via API.
+admin/manage_users.php	User management: create, edit, delete admin/staff accounts.
+admin/add_user.php	Form interface for creating new admin/staff users.
+admin/manage_sports.php	Listing and management of sports categories.
+admin/add_sport.php	Form to add new sports disciplines with emoji/icon metadata.
+admin/manage_teams.php	Team listing with sport association.
+admin/add_team.php	Team creation with coach assignment.
+admin/team_roster.php	View and manage players in a given team.
+admin/manage_players.php	Complete player registry overview.
+admin/add_player.php	Player registration form.
+admin/manage_matches.php	Match list for all sports.
+admin/schedule_match.php	Fixture creation interface (sport, teams, venue, date, time).
+admin/view_results.php	Consolidated view of completed match results.
+admin/enter_results.php	Score entry screen post-match.
+admin/reports.php	Summary reports across players, teams, and matches.
+admin/analytics.php	Advanced analytics and participation charts.
+admin/performance_tracking.php	Player performance tracking view.
+admin/player_statistics.php	Detailed statistics per player.
+admin/calendar.php	Calendar-based schedule view.
+admin/notifications.php	Notifications center for system or match-related alerts.
+admin/generate_certificate.php	Certificate generation interface for Admin.
+admin/profile.php	Admin profile view and personal settings.
+admin/settings.php	System-level configuration settings.
+
+staff/dashboard.php	Staff dashboard with role-specific KPIs and upcoming matches.
+staff/view_teams.php	View list of active teams.
+staff/team_roster.php	View team membership and player details.
+staff/view_players.php	View registered players.
+staff/view_player.php	Detailed single-player profile.
+staff/view_matches.php	View scheduled matches.
+staff/view_results.php	View finalized match results.
+staff/enter_scores.php	Score-entry interface restricted to Staff.
+staff/view_reports.php	Staff-facing reports.
+staff/generate_certificate.php	Staff-side certificate generation (as delegated by Admin).
+staff/profile.php	Staff profile view.
+staff/settings.php	Staff-side settings.
+
+API Endpoints
+Directory/File	                Purpose
+api/get_dashboard_stats.php	Provides JSON statistics for dashboards (counts of players, teams, sports, matches).
+api/search.php	                AJAX search endpoint for players, teams, or sports.
+api/get_teams.php	        Returns team lists for dropdowns or asynchronous UI components.
+api/notifications.php	        Returns notification data for Admin and Staff dashboards.
+
+Database & Assets
+Directory/File	                Purpose
+database/sports_management.sql	Primary database schema and seed data (11 normalized tables and 100+ sports).
+assets/css/*	                Application stylesheets (variables, layout, typography, dashboard UI).
+assets/js/*	                Frontend interaction scripts.
+assets/images/*	                Logos, avatars, sport icons, and illustrations.
+assets/uploads/*	        Uploaded photos for users and players.
+assets/screenshots/viewport/*	Viewport screenshots for documentation.
+assets/screenshots/full-height/*	Full-height screenshots for documentation.
+
+3.4 Database Table Specifications
+The CSMS database consists of 11 core tables in the `sports_management` schema. The following specifications summarize their structure and purpose.
+
+1. Table: users
+Purpose: Stores authentication and profile information for all Admin and Staff users.
+
+Column	        Type	                Null	Key	Default	        Description
+id	        INT	                NO	PRI	Auto Increment	Unique user ID.
+full_name	VARCHAR(100)	        NO	–	–	        Full name of the user.
+username	VARCHAR(50)	        NO	UNI	–	        Unique username for login.
+email	        VARCHAR(100)	        NO	UNI	–	        Official email address.
+password	VARCHAR(255)	        NO	–	–	        Bcrypt-hashed password.
+role	        ENUM('admin','staff')	NO	–	'staff'	        Role assigned to the user.
+status	        ENUM	                YES	–	'active'	Account state (active/inactive/deleted).
+gender	        ENUM	                YES	–	'other'	Gender metadata.
+mobile	        VARCHAR(15)	        YES	–	NULL	        Contact number.
+photo	        VARCHAR(255)	        YES	–	'default-avatar.png'	Profile photo filename.
+created_at	TIMESTAMP	        YES	–	CURRENT_TIMESTAMP	Creation timestamp.
+updated_at	TIMESTAMP	        YES	–	ON UPDATE		Last updated timestamp.
+deleted_at	TIMESTAMP	        YES	–	NULL	        Soft delete marker.
+
+2. Table: sports_categories
+Purpose: Stores the complete catalog of sports disciplines offered by the college.
+
+Column	        Type	                Null	Key	Default	        Description
+id	        INT	                NO	PRI	Auto Increment	Unique sport ID.
+sport_name	VARCHAR(100)	        NO	UNI	–	        Name of the sport (e.g., Football/Soccer).
+description	TEXT	                YES	–	NULL	        Optional long description.
+icon	        VARCHAR(255)	        YES	–	NULL	        Emoji or icon identifier.
+image	        VARCHAR(255)	        YES	–	NULL	        Optional sport illustration.
+category_type	ENUM	                YES	–	'team'	        Team/individual/both classification.
+min_players	INT	                YES	–	1	        Minimum number of players.
+max_players	INT	                YES	–	15	        Maximum number of players.
+status	        ENUM	                YES	–	'active'	Whether sport is currently active.
+created_at	TIMESTAMP	        YES	–	CURRENT_TIMESTAMP	Creation timestamp.
+updated_at	TIMESTAMP	        YES	–	ON UPDATE		Last modified timestamp.
+
+3. Table: players
+Purpose: Maintains detailed student-athlete profiles.
+
+Column	        Type	                Null	Key	Default	        Description
+id	        INT	                NO	PRI	Auto Increment	Unique player ID.
+name	        VARCHAR(100)	        NO	–	–	        Player's full name.
+register_number	VARCHAR(50)	        NO	UNI	–	        Unique college register number.
+dob	        DATE	                NO	–	–	        Date of birth.
+age	        INT	                NO	–	–	        Calculated age at registration.
+gender	        ENUM('Male','Female','Other')	NO	–	–	Biological gender classification.
+blood_group	VARCHAR(5)	        YES	–	NULL	        Blood group (for medical readiness).
+department	VARCHAR(100)	        NO	–	–	        Academic department.
+year	        ENUM('I','II','III','IV')	NO	–	–	        Year of study.
+mobile	        VARCHAR(15)	        NO	–	–	        Primary contact number.
+email	        VARCHAR(100)	        YES	–	NULL	        Email address.
+emergency_contact	VARCHAR(15)	YES	–	NULL	        Emergency contact number.
+address	        TEXT	                YES	–	NULL	        Residential address.
+photo	        VARCHAR(255)	        YES	–	'default-avatar.png'	Profile photo filename.
+status	        ENUM	                YES	–	'active'	Active/inactive/deleted state.
+created_at	TIMESTAMP	        YES	–	CURRENT_TIMESTAMP	Record creation time.
+updated_at	TIMESTAMP	        YES	–	ON UPDATE		Last update time.
+deleted_at	TIMESTAMP	        YES	–	NULL	        Soft delete marker.
+
+4. Table: player_sports
+Purpose: Implements a many-to-many relationship between players and sports.
+
+Column	        Type	                Null	Key	Default	        Description
+id	        INT	                NO	PRI	Auto Increment	Unique record ID.
+player_id	INT	                NO	MUL	–	        Foreign key to players.id.
+sport_id	INT	                NO	MUL	–	        Foreign key to sports_categories.id.
+is_primary	BOOLEAN	                YES	–	FALSE	        Whether this is the player's primary sport.
+position	VARCHAR(50)	        YES	–	NULL	        Playing position/role.
+experience_level	ENUM	        YES	–	'beginner'	Experience: beginner/intermediate/advanced.
+previous_experience	TEXT	        YES	–	NULL	        Prior achievements or background.
+created_at	TIMESTAMP	        YES	–	CURRENT_TIMESTAMP	Record creation timestamp.
+
+5. Table: teams
+Purpose: Stores formal team entities for each sport.
+
+Column	        Type	                Null	Key	Default	        Description
+id	        INT	                NO	PRI	Auto Increment	Unique team ID.
+team_name	VARCHAR(100)	        NO	–	–	        Name of the team (e.g., CS Football A).
+sport_id	INT	                NO	MUL	–	        Linked sport (sports_categories.id).
+coach_name	VARCHAR(100)	        YES	–	NULL	        Coach or staff in charge.
+logo	        VARCHAR(255)	        YES	–	NULL	        Team logo filename.
+matches_played	INT	                YES	–	0	        Total matches played.
+matches_won	INT	                YES	–	0	        Total matches won.
+status	        ENUM	                YES	–	'active'	Active/inactive/deleted status.
+created_at	TIMESTAMP	        YES	–	CURRENT_TIMESTAMP	Creation timestamp.
+updated_at	TIMESTAMP	        YES	–	ON UPDATE		Last updated timestamp.
+
+6. Table: team_players
+Purpose: Maps players to teams and identifies captains.
+
+Column	        Type	                Null	Key	Default	        Description
+id	        INT	                NO	PRI	Auto Increment	Unique ID.
+team_id	INT	                NO	MUL	–	        Foreign key to teams.id.
+player_id	INT	                NO	MUL	–	        Foreign key to players.id.
+is_captain	BOOLEAN	                YES	–	FALSE	        Whether the player is the team captain.
+created_at	TIMESTAMP	        YES	–	CURRENT_TIMESTAMP	Assignment timestamp.
+
+7. Table: matches
+Purpose: Stores scheduling information for all fixtures.
+
+Column	        Type	                Null	Key	Default	        Description
+id	        INT	                NO	PRI	Auto Increment	Unique match ID.
+sport_id	INT	                NO	MUL	–	        Sport type for the match.
+team1_id	INT	                NO	MUL	–	        First participating team.
+team2_id	INT	                NO	MUL	–	        Second participating team.
+match_date	DATE	                NO	–	–	        Scheduled date.
+match_time	TIME	                NO	–	–	        Scheduled time.
+venue	        VARCHAR(255)	        NO	–	–	        Ground/court/arena location.
+status	        ENUM	                YES	–	'scheduled'	Scheduled/completed/cancelled.
+created_at	TIMESTAMP	        YES	–	CURRENT_TIMESTAMP	Record creation time.
+updated_at	TIMESTAMP	        YES	–	ON UPDATE		Last update time.
+
+8. Table: match_results
+Purpose: Captures final scores and results for each match.
+
+Column	        Type	                Null	Key	Default	        Description
+id	        INT	                NO	PRI	Auto Increment	Unique ID.
+match_id	INT	                NO	UNI	–	        Foreign key to matches.id.
+team1_score	INT	                NO	–	0	        Score of Team 1.
+team2_score	INT	                NO	–	0	        Score of Team 2.
+winner_team_id	INT	                YES	–	NULL	        Winning team ID (nullable for draws).
+result_status	ENUM	                YES	–	'final'	        final/draw/walkover.
+notes	        TEXT	                YES	–	NULL	        Additional remarks.
+created_at	TIMESTAMP	        YES	–	CURRENT_TIMESTAMP	Creation timestamp.
+
+9. Table: player_performance
+Purpose: Tracks per-match statistics for individual players.
+
+Column	        Type	                Null	Key	Default	        Description
+id	        INT	                NO	PRI	Auto Increment	Unique ID.
+match_id	INT	                NO	MUL	–	        Match reference.
+player_id	INT	                NO	MUL	–	        Player reference.
+participated	BOOLEAN	                YES	–	TRUE	        Whether the player took part.
+runs_scored	INT	                YES	–	0	        Batting performance (cricket).
+balls_faced	INT	                YES	–	0	        Balls faced (cricket).
+wickets	        INT	                YES	–	0	        Wickets taken.
+overs	        DECIMAL(4,1)	        YES	–	0.0	        Overs bowled.
+goals	        INT	                YES	–	0	        Goals scored (football/hockey).
+assists	        INT	                YES	–	0	        Assists provided.
+yellow_cards	INT	                YES	–	0	        Yellow cards received.
+red_cards	INT	                YES	–	0	        Red cards received.
+points	        INT	                YES	–	0	        Points scored (basketball).
+rebounds	INT	                YES	–	0	        Rebounds (basketball).
+performance_rating	DECIMAL(3,1)	YES	–	0.0	        Overall rating out of 10.
+notes	        TEXT	                YES	–	NULL	        Custom notes.
+created_at	TIMESTAMP	        YES	–	CURRENT_TIMESTAMP	Creation timestamp.
+
+10. Table: certificates
+Purpose: Logs all generated certificates for participation and achievement.
+
+Column	        Type	                Null	Key	Default	        Description
+id	        INT	                NO	PRI	Auto Increment	Unique certificate ID.
+player_id	INT	                NO	MUL	–	        Recipient player.
+certificate_type	ENUM	        NO	–	–	        Participation/Achievement/Winner/Runner-Up.
+sport_id	INT	                YES	MUL	NULL	        Associated sport.
+achievement	TEXT	                YES	–	NULL	        Description of achievement.
+issue_date	DATE	                NO	–	–	        Certificate issue date.
+generated_by	INT	                NO	MUL	–	        User (admin/staff) who generated it.
+created_at	TIMESTAMP	        YES	–	CURRENT_TIMESTAMP	Creation timestamp.
+
+11. Table: activity_log
+Purpose: Maintains an institutional audit trail of all core operations.
+
+Column	        Type	                Null	Key	Default	        Description
+id	        INT	                NO	PRI	Auto Increment	Unique log ID.
+user_id	INT	                YES	MUL	NULL	        User who performed the action.
+action_type	ENUM	                NO	–	–	        create/update/delete/login/logout.
+module	        VARCHAR(50)	        NO	–	–	        Module name (users, players, matches, etc.).
+record_id	INT	                YES	–	NULL	        ID of affected record.
+description	TEXT	                YES	–	NULL	        Human-readable description.
+ip_address	VARCHAR(45)	        YES	–	NULL	        IP address of the actor.
+created_at	TIMESTAMP	        YES	–	CURRENT_TIMESTAMP	Log timestamp.
+
+3.5 Module Specification
+The CSMS is implemented using a modular architecture. Each module encapsulates a specific business domain.
+
+Module 1: Authentication & Authorization
+Purpose: Secure user login, role enforcement, and session management.
+Key Functions:
+•	isLoggedIn(), hasRole() — Helper checks for session and role.
+•	requireLogin(), requireAdmin() — Gatekeepers for protected pages.
+•	Login Workflow in index.php — Reads POST credentials, verifies bcrypt-hashed password, initializes session, redirects based on role.
+Security:
+•	All passwords hashed with password_hash() using BCRYPT.
+•	Role-based redirects and header checks on every admin/staff page.
+•	Activity logging on login and logout events.
+
+Module 2: Sports Catalog Management
+Purpose: Maintain the master list of sports disciplines.
+Key Operations:
+•	Create: Add new sports with name, icon/emoji, category type, and min/max players.
+•	Read: List and filter sports categories with active/inactive statuses.
+•	Update: Edit sport details without losing relational integrity.
+•	Delete (Logical): Prevent deletion if dependencies exist, to maintain referential integrity.
+
+Module 3: Player Registry
+Purpose: Centralized management of student-athlete records.
+Key Features:
+•	Player registration with demographic and academic details.
+•	Association with one or more sports via player_sports.
+•	Avatar handling (system avatar vs uploaded photo).
+•	Search and filter by register number, name, department, or year.
+
+Module 4: Team & Roster Management
+Purpose: Organize players into sports-specific teams.
+Key Features:
+•	Team creation per sport with unique name and optional logo.
+•	Add/remove players to/from teams using team_players.
+•	Mark exactly one player as captain per team when needed.
+•	Display of team rosters and basic statistics (matches played/won).
+
+Module 5: Match Scheduling & Operations
+Purpose: Manage fixtures and prevent scheduling conflicts.
+Key Features:
+•	Match scheduling with sport, teams, date, time, and venue.
+•	Validation to ensure two distinct teams and correct sport association.
+•	Status lifecycle: scheduled → completed → (optionally) cancelled.
+•	Calendar and list views for upcoming and historical fixtures.
+
+Module 6: Scoring, Results & Performance
+Purpose: Capture match outcomes and detailed player statistics.
+Key Features:
+•	Enter and edit match scores, compute winners/draws.
+•	Store per-player statistics (goals, runs, assists, cards, points, etc.).
+•	Support cross-sport metrics through a generalized performance table.
+•	Display performance summaries in analytics and player statistics screens.
+
+Module 7: Certificate Engine
+Purpose: Automate generation and logging of tournament certificates.
+Key Features:
+•	Generate participation and achievement certificates for players.
+•	Log each certificate in the certificates table with issue date and issuer.
+•	Provide history view for auditing and reprint reference.
+
+Module 8: Admin Analytics & Audit Reporting
+Purpose: Provide institutional visibility and accountability.
+Key Features:
+•	Dashboard KPIs for players, teams, sports, matches, and operations.
+•	Graphical analytics of participation and outcomes.
+•	Activity log views for administrators to review create/update/delete events.
+
+
                                                     CHAPTER 4 — TESTING AND IMPLEMENTATION
 
-4.1 SYSTEM TESTING 
+4.1 System Testing
+Testing of CSMS was conducted at multiple levels to ensure correctness, robustness, and security.
 
 4.1.1 Unit Testing
-Unit testing focused on validating individual functions and components in isolation.
+Unit testing focused on validating individual helper functions and components in isolation.
 •	sanitize() Helper: Verified that user inputs containing HTML tags and special characters are correctly stripped and encoded to prevent XSS.
-•	getPlayerPhoto() Function: Tested logic for handling system avatars versus custom uploads, ensuring correct image path resolution based on gender and ID.
-•	calculateAge() Function: Validated age calculation accuracy from diverse Date of Birth inputs.
-•	getSportIcon() Function: Verified correct determination of whether to display an emoji, an SVG file, or a default trophy icon.
+•	getUserPhoto() and getPlayerPhoto(): Tested logic for handling system avatars versus custom uploads, ensuring correct image path resolution and fallback behaviour.
+•	calculateAge(): Validated age calculation accuracy across various DOB inputs.
+•	getSportIcon(): Verified correct determination of whether to display an emoji, an SVG file, or a default trophy icon.
+•	usernameExists() / emailExists(): Ensured correct detection of duplicates during user creation and editing.
 
 4.1.2 Integration Testing
-Integration testing checked the interaction between the PHP backend, the mysqli database layer, and the frontend forms.
-•	Login Workflow: Verified that successful login correctly initializes all session variables (user_id, username, role, full_name) and triggers the correct role-based redirect.
-•	Player Registration: Ensured that form data flows correctly through sanitization, insertion into the players table, and subsequent link to the player_sports table.
-•	Team Formation: Confirmed that players can be added to teams with captaincy constraints enforced and sport-association validated.
+Integration testing checked the interaction between the PHP backend, the MySQL database layer (via mysqli), and the frontend forms.
+•	Login Workflow: Verified that successful login correctly initializes all core session variables (user_id, username, full_name, role) and triggers the correct role-based redirect (Admin vs Staff).
+•	Player Registration: Ensured that form data flows through sanitization, uniqueness validation, insertion into players, and mapping to player_sports.
+•	Team Formation: Confirmed that players can be added to teams with sport linkage and optional captaincy, and that duplicates are prevented.
+•	Match Scheduling: Verified that scheduled matches correctly reference existing teams and sports, and appear on dashboards.
+•	Certificate Generation: Confirmed that certificates are written to the certificates table and that related UI elements display them accurately.
 
 4.1.3 Validation Testing
-•	Match Schedule Conflict: Verified that assigning a team to two different venues or times simultaneously correctly blocks the insert.
-•	Registration Integrity: Confirmed that unique constraints on register_number and username are strictly enforced.
-•	Role Access Control: Verified that accessing /admin/logs.php while logged in as a Staff role correctly redirects to the staff dashboard.
+•	Match Schedule Conflict: Verified that assigning the same team to multiple matches at conflicting times/venues is restricted through business rules.
+•	Registration Integrity: Confirmed that unique constraints on register_number (players) and username (users) are respected and that meaningful error messages are shown.
+•	Role Access Control: Verified that accessing Admin-only pages (e.g., manage_users.php) while logged in as Staff correctly redirects to the staff dashboard with an appropriate message.
+•	Input Validation: Ensured that all mandatory fields trigger browser-level validation as well as server-side checks.
 
 4.1.4 Output Testing
-•	Certificate Generation: Confirmed that certificates are generated with accurate data (Player Name, Sport, Achievement) and follow the institutional layout.
-•	Audit Log Recording: Verified that every Create, Update, and Delete operation generates a corresponding record in the activity_log table with the actor's IP and timestamp.
+•	Certificate Layout: Confirmed that generated certificates display correct player names, sport names, certificate type, and dates as per institutional format.
+•	Dashboard KPIs: Verified that counts for players, teams, sports, and matches match actual database values.
+•	Reports: Confirmed that report screens aggregate consistent data from multiple tables (matches, players, teams, certificates).
+•	Audit Log Recording: Verified that every create, update, and delete operation generates a corresponding record in activity_log with proper user reference and timestamp.
 
 4.2 Implementation Tools & Environment
 4.2.1 Development Environment
-•	Stack: XAMPP 8.2 (Apache 2.4, PHP 8.2.12, MariaDB 10.4)
-•	Editor: Visual Studio Code
-•	Target: Institutional Offline Server (Intranet)
+•	Stack: XAMPP 8.2 (Apache 2.4, PHP 8.2.12, MariaDB 10.4).
+•	Editor: Visual Studio Code.
+•	Version Control: Git (local repository for versioned snapshots).
+•	Target Deployment: Institutional Offline Server (College Intranet).
 
 4.2.2 Database Setup
-•	Database Name: sports_management
-•	SQL Script: database/sports_management.sql
-•	Tables: 11 Normalized Tables (InnoDB engine)
-•	Seed Data: 100+ Sports Disciplines, 1 Default Admin User.
+•	Database Name: `sports_management`.
+•	SQL Script: `database/sports_management.sql` (includes CREATE DATABASE, all CREATE TABLE statements, indexes, foreign keys, default admin user, and a comprehensive sports registry).
+•	Engine: InnoDB with UTF8MB4 encoding for robust relational integrity and Unicode support.
 
 4.3 System Security Policies
 4.3.1 Authentication & Authorization
-•	Bcrypt Hashing: All passwords are hashed using PHP's password_hash() with BCRYPT.
-•	RBAC: Role-Based Access Control enforced at the header level for every page.
-•	Audit Trail: Every administrative action is logged for accountability.
+•	Bcrypt Hashing: All passwords are hashed using PHP's password_hash() (BCRYPT) to protect against credential theft.
+•	Role Enforcement: Every administrative page begins with requireAdmin(), and all Staff pages call requireLogin(), effectively sealing off unauthenticated access.
+•	Session Security: Sessions are created on login and fully destroyed on logout via logout.php.
+•	Audit Trail: User actions—especially create, update, delete, login, and logout—are recorded in activity_log for accountability.
 
-4.3.2 Input Sanitization
-•	Prepared Statements: All database queries use mysqli_prepare() and bind_param to prevent SQL Injection.
-•	XSS Prevention: All output is passed through htmlspecialchars() before rendering.
+4.3.2 Input Validation & Sanitization
+•	Prepared Statements: All database queries use mysqli prepared statements with bound parameters to prevent SQL Injection.
+•	Output Encoding: All user-supplied data is passed through htmlspecialchars() before rendering into HTML to prevent cross-site scripting (XSS).
+•	File Upload Validation: Only permitted extensions and size-limited files are accepted for player and user profile photos.
 
-4.4 Testing Summary
-The testing phase achieved a 100% pass rate on all critical path operations, including authentication, registration, scheduling, and certificate generation.
+4.4 Unit & Integration Testing Summary
+Testing achieved a 100% pass rate on the critical workflows of CSMS:
+•	User authentication and role redirection.
+•	Player registration and sport association.
+•	Team creation and roster updates.
+•	Match scheduling and result recording.
+•	Certificate generation and logging.
 
-CHAPTER 5 — CONCLUSION AND SUGGESTONS
+4.5 User Acceptance Testing (UAT)
+UAT was conducted with representative users from the PE Department.
+•	Admin User: Tested user management, sports catalog configuration, and analytics dashboards.
+•	Staff User: Tested daily workflows including player entry, team formation, match scheduling, score updates, and certificate generation.
+Feedback received was positive, with minor UI refinements incorporated into the final iteration (e.g., improved icons, clearer labels, and enhanced dashboard texts).
+
+
+                                                    CHAPTER 5 — CONCLUSION AND SUGGESTIONS
 
 5.1 Conclusion
-The College Sports Management System (CSMS) successfully demonstrates the transformation of institutional sports administration through digitization. By centralizing player data, automating scheduling, and providing instant certificate generation, the system eliminates traditional friction points and provides a professional digital platform for the Department of Physical Education.
+The College Sports Management System (CSMS) successfully demonstrates the transformation of institutional sports administration through digitization. By centralizing player data, automating match scheduling, and providing instant certificate generation, the system eliminates traditional friction points and provides a professional digital backbone for the Department of Physical Education.
 
-Key achievements:
-•	Operational Excellence: Centralized registry of 100+ sports and 11-table relational integrity.
-•	Institutional Reliability: Fully offline-ready architecture for intramural use.
-•	Accountability: Comprehensive audit logging of all administrative actions.
-•	Student Recognition: Instant, professional certificate generation for achievement tracking.
+Key Achievements:
+•	Operational Excellence: Centralized registry of 100+ sports disciplines and 11-table relational integrity for all core entities.
+•	Institutional Reliability: Fully offline-ready architecture for intramural use with minimal external dependencies.
+•	Accountability: Comprehensive audit logging of all administrative actions, improving traceability and governance.
+•	Student Recognition: Instant, professional certificate generation and archival for both participation and achievements.
+•	Scalability: Modular codebase and normalized database enable future expansion (e.g., mobile apps, AI analytics) without major refactoring.
 
 5.2 Suggestions for Future Enhancement
-1.	Digital Certificate Verification: Adding unique QR codes to every certificate for online authenticity verification.
-2.	Live Scoring Interface: A simplified mobile-web interface for staff to update scores live from the field.
-3.	Parental Notification: Automated SMS/Email integration for significant achievements or event schedules.
-4.	Advanced Analytics: AI-driven performance prediction and participation trend analysis.
+1.	Digital Certificate Verification: Integrate QR codes on certificates for online authenticity checks via a public verification portal.
+2.	Live Scoring Interface: Develop a mobile-optimized interface for field-side score updates in real time.
+3.	Parental/Guardian Notification: Integrate SMS/Email alerts for key events such as tournament wins or major achievements.
+4.	Advanced Analytics: Incorporate AI/ML models to analyze historical data and suggest talent identification or training focus areas.
+5.	Student Portal Extension: Extend the system with a student-facing portal for viewing personal performance dashboards and certificate history.
+
 
 BIBLIOGRAPHY
-BIBLIOGRAPHY
 
-6.1 BOOKS AND PUBLICATIONS
+6.1 Books and Publications
 •	Lockhart, J. (2015). Modern PHP: New Features and Good Practices. O'Reilly Media.
 •	Nixon, R. (2021). Learning PHP, MySQL & JavaScript: With jQuery, CSS & HTML5. O'Reilly Media.
 •	Ullman, L. (2014). PHP and MySQL for Dynamic Web Sites. Peachpit Press.
 
-6.2 ONLINE RESOURCES & DOCUMENTATION
+6.2 Online Resources & Documentation
 •	PHP Official Manual: https://www.php.net/
 •	MySQL Documentation: https://dev.mysql.com/doc/
 •	MDN Web Docs: https://developer.mozilla.org/
 
+
 APPENDICES
 APPENDIX – A (Screen Formats)
 
-A.1 Authentication
-01. Login Portal — index.php
-![Login Portal](../assets/screenshots/01_login.png)
-Description: The entry point for Admin and Staff. Features institutional branding, username/password fields, and role-based redirection.
+A.1 Authentication Page
+01. Login Page — index.php
 
-A.2 Administrator Modules
+Viewport Screenshot:
+![Login Page — Viewport](../assets/screenshots/viewport/01-login-page.png)
+
+Full-Height Screenshot:
+![Login Page — Full Height](../assets/screenshots/full-height/01-login-page.png)
+
+Description: The public entry point for CSMS. Displays institutional branding, username and password fields, error alerts, and role-based redirect logic after successful authentication.
+
+
+A.2 Administrator Pages (Admin Role)
+Login Credentials for Testing: admin / password
+
 02. Admin Dashboard — admin/dashboard.php
-![Admin Dashboard](../assets/screenshots/02_dashboard.png)
-Description: High-level KPI overview showing Total Players, Active Sports, Total Matches, and Recent Activity stat-cards.
+Viewport: ![Admin Dashboard — Viewport](../assets/screenshots/viewport/02-admin-dashboard.png)
+Full Height: ![Admin Dashboard — Full Height](../assets/screenshots/full-height/02-admin-dashboard.png)
+Description: Central cockpit for the Administrator. Displays real-time KPIs for total players, teams, sports, and matches, along with analytics panels and quick-access actions.
 
-03. Sports Registry — admin/sports.php
-![Sports Registry](../assets/screenshots/03_sports.png)
-Description: Interface for managing the 100+ sport disciplines, categorized by type (Team/Individual).
+03. Manage Users — admin/manage_users.php
+Viewport: ![Manage Users — Viewport](../assets/screenshots/viewport/03-admin-manage-users.png)
+Full Height: ![Manage Users — Full Height](../assets/screenshots/full-height/03-admin-manage-users.png)
+Description: User directory for Admin and Staff accounts with options to add, edit, and deactivate users.
 
-04. Audit Logs — admin/logs.php
-![Audit Logs](../assets/screenshots/04_logs.png)
-Description: Searchable, filterable list of every administrative action performed in the system.
+04. Add User — admin/add_user.php
+Viewport: ![Add User — Viewport](../assets/screenshots/viewport/04-admin-add-user.png)
+Full Height: ![Add User — Full Height](../assets/screenshots/full-height/04-admin-add-user.png)
+Description: Form interface for creating new administrative or staff accounts with validation for username and email uniqueness.
 
-A.3 Staff Modules
-05. Player Hub — staff/players.php
-![Player Hub](../assets/screenshots/05_players.png)
-Description: Central registry for student-athlete registration, department tracking, and profile management.
+05. Manage Sports — admin/manage_sports.php
+Viewport: ![Manage Sports — Viewport](../assets/screenshots/viewport/05-admin-manage-sports.png)
+Full Height: ![Manage Sports — Full Height](../assets/screenshots/full-height/05-admin-manage-sports.png)
+Description: Lists all sports categories with icons, type (team/individual/both), and active status; supports add/edit operations.
 
-06. Team Center — staff/teams.php
-![Team Center](../assets/screenshots/06_teams.png)
-Description: Tools for forming team rosters and designating captains for specific sports.
+06. Add Sport — admin/add_sport.php
+Viewport: ![Add Sport — Viewport](../assets/screenshots/viewport/06-admin-add-sport.png)
+Full Height: ![Add Sport — Full Height](../assets/screenshots/full-height/06-admin-add-sport.png)
+Description: Form for registering a new sport in the system, including emoji/icon, classification, and min/max players.
 
-07. Match Master — staff/matches.php
-![Match Master](../assets/screenshots/07_matches.png)
-Description: Scheduling interface with conflict-aware validation for venue and time.
+07. Manage Teams — admin/manage_teams.php
+Viewport: ![Manage Teams — Viewport](../assets/screenshots/viewport/07-admin-manage-teams.png)
+Full Height: ![Manage Teams — Full Height](../assets/screenshots/full-height/07-admin-manage-teams.png)
+Description: Overview of all teams grouped by sport, with quick access to edit and roster management.
 
-08. Certificate Engine — staff/certificates.php
-![Certificate Engine](../assets/screenshots/08_certificates.png)
-Description: Automated tool for generating and logging participation/achievement certificates.
+08. Add Team — admin/add_team.php
+Viewport: ![Add Team — Viewport](../assets/screenshots/viewport/08-admin-add-team.png)
+Full Height: ![Add Team — Full Height](../assets/screenshots/full-height/08-admin-add-team.png)
+Description: Interface to create new teams, assign a coach, select sport, and optionally upload a logo.
+
+09. Team Roster — admin/team_roster.php
+Viewport: ![Team Roster — Viewport](../assets/screenshots/viewport/09-admin-team-roster.png)
+Full Height: ![Team Roster — Full Height](../assets/screenshots/full-height/09-admin-team-roster.png)
+Description: Displays team composition with player details and captain designation for a selected team.
+
+10. Manage Players — admin/manage_players.php
+Viewport: ![Manage Players — Viewport](../assets/screenshots/viewport/10-admin-manage-players.png)
+Full Height: ![Manage Players — Full Height](../assets/screenshots/full-height/10-admin-manage-players.png)
+Description: Central registry of all players; supports filters on department, year, and sport participation.
+
+11. Add Player — admin/add_player.php
+Viewport: ![Add Player — Viewport](../assets/screenshots/viewport/11-admin-add-player.png)
+Full Height: ![Add Player — Full Height](../assets/screenshots/full-height/11-admin-add-player.png)
+Description: Comprehensive form for registering a new player with academic, demographic, and emergency contact details.
+
+12. View Player — admin/view_player.php
+Viewport: ![View Player — Viewport](../assets/screenshots/viewport/12-admin-view-player.png)
+Full Height: ![View Player — Full Height](../assets/screenshots/full-height/12-admin-view-player.png)
+Description: Detailed profile page showing player information, associated sports, team memberships, and performance summaries.
+
+13. Manage Matches — admin/manage_matches.php
+Viewport: ![Manage Matches — Viewport](../assets/screenshots/viewport/13-admin-manage-matches.png)
+Full Height: ![Manage Matches — Full Height](../assets/screenshots/full-height/13-admin-manage-matches.png)
+Description: Tabular listing of all matches with sport, teams, date, venue, and status.
+
+14. Schedule Match — admin/schedule_match.php
+Viewport: ![Schedule Match — Viewport](../assets/screenshots/viewport/14-admin-schedule-match.png)
+Full Height: ![Schedule Match — Full Height](../assets/screenshots/full-height/14-admin-schedule-match.png)
+Description: Form-based workflow for creating new fixtures with validation for team selection and date/time fields.
+
+15. View Results — admin/view_results.php
+Viewport: ![View Results — Viewport](../assets/screenshots/viewport/15-admin-view-results.png)
+Full Height: ![View Results — Full Height](../assets/screenshots/full-height/15-admin-view-results.png)
+Description: Shows completed matches and outcomes with quick filters per sport or time range.
+
+16. Enter Results — admin/enter_results.php
+Viewport: ![Enter Results — Viewport](../assets/screenshots/viewport/16-admin-enter-results.png)
+Full Height: ![Enter Results — Full Height](../assets/screenshots/full-height/16-admin-enter-results.png)
+Description: Interface to enter final scores and result status (win/loss/draw/walkover).
+
+17. Reports — admin/reports.php
+Viewport: ![Reports — Viewport](../assets/screenshots/viewport/17-admin-reports.png)
+Full Height: ![Reports — Full Height](../assets/screenshots/full-height/17-admin-reports.png)
+Description: Aggregated reports showing participation counts, match summaries, and distribution across sports.
+
+18. Analytics — admin/analytics.php
+Viewport: ![Analytics — Viewport](../assets/screenshots/viewport/18-admin-analytics.png)
+Full Height: ![Analytics — Full Height](../assets/screenshots/full-height/18-admin-analytics.png)
+Description: Visual analytics dashboard with charts for trends in registrations, matches, and achievements.
+
+19. Performance Tracking — admin/performance_tracking.php
+Viewport: ![Performance Tracking — Viewport](../assets/screenshots/viewport/19-admin-performance-tracking.png)
+Full Height: ![Performance Tracking — Full Height](../assets/screenshots/full-height/19-admin-performance-tracking.png)
+Description: High-level view summarizing performance metrics of players and teams over time.
+
+20. Player Statistics — admin/player_statistics.php
+Viewport: ![Player Statistics — Viewport](../assets/screenshots/viewport/20-admin-player-statistics.png)
+Full Height: ![Player Statistics — Full Height](../assets/screenshots/full-height/20-admin-player-statistics.png)
+Description: Detailed statistics screen offering per-player breakdowns of goals, runs, points, and other metrics.
+
+21. Calendar — admin/calendar.php
+Viewport: ![Calendar — Viewport](../assets/screenshots/viewport/21-admin-calendar.png)
+Full Height: ![Calendar — Full Height](../assets/screenshots/full-height/21-admin-calendar.png)
+Description: Calendar visualization for upcoming and past matches mapped to dates.
+
+22. Notifications — admin/notifications.php
+Viewport: ![Notifications — Viewport](../assets/screenshots/viewport/22-admin-notifications.png)
+Full Height: ![Notifications — Full Height](../assets/screenshots/full-height/22-admin-notifications.png)
+Description: Central notification hub displaying new alerts, reminders, and system messages.
+
+23. Generate Certificate — admin/generate_certificate.php
+Viewport: ![Generate Certificate — Viewport](../assets/screenshots/viewport/23-admin-generate-certificate.png)
+Full Height: ![Generate Certificate — Full Height](../assets/screenshots/full-height/23-admin-generate-certificate.png)
+Description: Admin-side interface for creating participation and achievement certificates for players.
+
+24. Admin Profile — admin/profile.php
+Viewport: ![Admin Profile — Viewport](../assets/screenshots/viewport/24-admin-profile.png)
+Full Height: ![Admin Profile — Full Height](../assets/screenshots/full-height/24-admin-profile.png)
+Description: Profile page where the administrator can view and update personal information.
+
+25. Admin Settings — admin/settings.php
+Viewport: ![Admin Settings — Viewport](../assets/screenshots/viewport/25-admin-settings.png)
+Full Height: ![Admin Settings — Full Height](../assets/screenshots/full-height/25-admin-settings.png)
+Description: System configuration screen to manage global options such as branding, time zone, and other ready-only technical parameters.
+
+
+A.3 Staff Pages (Staff Role)
+Login Credentials for Testing: staff / password
+
+26. Staff Dashboard — staff/dashboard.php
+Viewport: ![Staff Dashboard — Viewport](../assets/screenshots/viewport/26-staff-dashboard.png)
+Full Height: ![Staff Dashboard — Full Height](../assets/screenshots/full-height/26-staff-dashboard.png)
+Description: Staff-focused dashboard highlighting active players, teams, completed matches, and upcoming fixtures.
+
+27. View Teams — staff/view_teams.php
+Viewport: ![View Teams — Viewport](../assets/screenshots/viewport/27-staff-view-teams.png)
+Full Height: ![View Teams — Full Height](../assets/screenshots/full-height/27-staff-view-teams.png)
+Description: Read-only list of teams available to staff for operational reference.
+
+28. Team Roster — staff/team_roster.php
+Viewport: ![Staff Team Roster — Viewport](../assets/screenshots/viewport/28-staff-team-roster.png)
+Full Height: ![Staff Team Roster — Full Height](../assets/screenshots/full-height/28-staff-team-roster.png)
+Description: Displays the composition of a selected team, mirroring admin-side but scoped to staff permissions.
+
+29. View Players — staff/view_players.php
+Viewport: ![View Players — Viewport](../assets/screenshots/viewport/29-staff-view-players.png)
+Full Height: ![View Players — Full Height](../assets/screenshots/full-height/29-staff-view-players.png)
+Description: Listing of all registered players accessible to staff for match preparation and verification.
+
+30. View Player — staff/view_player.php
+Viewport: ![Staff View Player — Viewport](../assets/screenshots/viewport/30-staff-view-player.png)
+Full Height: ![Staff View Player — Full Height](../assets/screenshots/full-height/30-staff-view-player.png)
+Description: Detailed single-player profile from the staff perspective, including sports participation and team linkage.
+
+31. View Matches — staff/view_matches.php
+Viewport: ![View Matches — Viewport](../assets/screenshots/viewport/31-staff-view-matches.png)
+Full Height: ![View Matches — Full Height](../assets/screenshots/full-height/31-staff-view-matches.png)
+Description: Upcoming and past fixtures relevant to staff operations.
+
+32. View Results — staff/view_results.php
+Viewport: ![Staff View Results — Viewport](../assets/screenshots/viewport/32-staff-view-results.png)
+Full Height: ![Staff View Results — Full Height](../assets/screenshots/full-height/32-staff-view-results.png)
+Description: Overview of match results to assist staff in tracking outcomes and achievements.
+
+33. Enter Scores — staff/enter_scores.php
+Viewport: ![Enter Scores — Viewport](../assets/screenshots/viewport/33-staff-enter-scores.png)
+Full Height: ![Enter Scores — Full Height](../assets/screenshots/full-height/33-staff-enter-scores.png)
+Description: Operational interface where staff record match scores and player statistics immediately after games.
+
+34. View Reports — staff/view_reports.php
+Viewport: ![Staff View Reports — Viewport](../assets/screenshots/viewport/34-staff-view-reports.png)
+Full Height: ![Staff View Reports — Full Height](../assets/screenshots/full-height/34-staff-view-reports.png)
+Description: Staff-scoped reports highlighting day-to-day operational metrics and summaries.
+
+35. Generate Certificate — staff/generate_certificate.php
+Viewport: ![Staff Generate Certificate — Viewport](../assets/screenshots/viewport/35-staff-generate-certificate.png)
+Full Height: ![Staff Generate Certificate — Full Height](../assets/screenshots/full-height/35-staff-generate-certificate.png)
+Description: Screen used by staff to generate certificates under administrative guidance.
+
+36. Staff Profile — staff/profile.php
+Viewport: ![Staff Profile — Viewport](../assets/screenshots/viewport/36-staff-profile.png)
+Full Height: ![Staff Profile — Full Height](../assets/screenshots/full-height/36-staff-profile.png)
+Description: Personal profile where staff can review and update their own details.
+
+37. Staff Settings — staff/settings.php
+Viewport: ![Staff Settings — Viewport](../assets/screenshots/viewport/37-staff-settings.png)
+Full Height: ![Staff Settings — Full Height](../assets/screenshots/full-height/37-staff-settings.png)
+Description: Staff settings area for adjusting limited preferences available to this role.
+
