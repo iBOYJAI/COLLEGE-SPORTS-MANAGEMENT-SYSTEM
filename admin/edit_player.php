@@ -203,7 +203,7 @@ include '../includes/sidebar.php';
                             <h3 class="form-section-title">Address</h3>
                             <div class="premium-field">
                                 <label class="field-label">Home Address</label>
-                                <textarea name="address" class="premium-input" rows="4" style="resize: none;"><?php echo htmlspecialchars($player['address']); ?></textarea>
+                                <textarea name="address" class="premium-input" rows="4" style="resize: none;"><?php echo htmlspecialchars($player['address'] ?? ''); ?></textarea>
                             </div>
                         </div>
                     </div>

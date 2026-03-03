@@ -946,8 +946,24 @@ include '../includes/sidebar.php';
         text-align: center;
     }
 
-    /* Print Styles - Hide everything except certificate */
+    /* Print Styles - Refined for High Fidelity */
     @media print {
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        html,
+        body {
+            background: white !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+            overflow: visible !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
 
         .dashboard-header,
         .header-actions,
@@ -955,47 +971,78 @@ include '../includes/sidebar.php';
         .sidebar,
         .header-main,
         .cert-actions,
-        .glass-card {
+        .sidebar-header,
+        .sidebar-menu,
+        .header,
+        .btn-toggle,
+        .form-footer,
+        .premium-divider,
+        #sidebar-toggle,
+        .dashboard-container .subtitle-text,
+        .dashboard-container .welcome-text {
             display: none !important;
         }
 
-        .main-grid {
-            grid-template-columns: 1fr !important;
+        .main-content,
+        .dashboard-container,
+        .app-wrapper,
+        .content-wrapper {
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            border: none !important;
+            background: transparent !important;
+            overflow: visible !important;
         }
 
-        .dashboard-container {
+        .main-grid,
+        .charts-column {
+            display: block !important;
+            width: 100% !important;
+            margin: 0 !important;
             padding: 0 !important;
+        }
+
+        .glass-card {
+            display: block !important;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            overflow: visible !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100% !important;
         }
 
         #certificate-print-area {
             display: block !important;
-            page-break-inside: avoid;
+            width: 210mm !important;
+            /* A4 Width */
+            height: 297mm !important;
+            /* A4 Height */
+            margin: 0 auto !important;
+            padding: 0 !important;
+            position: relative !important;
+            overflow: hidden !important;
+            box-sizing: border-box !important;
+            page-break-after: always;
+            /* If content is too large, we scale it down to fit */
+            transform-origin: top center;
+            transform: scale(0.95);
+            /* Slight scale down to ensure no edge clipping */
         }
 
         .certificate-paper {
-            padding: 20px !important;
-            margin: 0;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        body * {
-            visibility: hidden;
-        }
-
-        #certificate-print-area,
-        #certificate-print-area * {
-            visibility: visible;
-        }
-
-        #certificate-print-area {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
+            padding: 20mm !important;
+            margin: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            box-sizing: border-box !important;
+            background: white !important;
+            box-shadow: none !important;
+            border: none !important;
         }
     }
 </style>

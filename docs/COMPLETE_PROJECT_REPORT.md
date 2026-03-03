@@ -1,4 +1,4 @@
-# COLLEGCOLLEGE SPORTS MANAGEMENT SYSTEM
+# COLLEGE SPORTS MANAGEMENT SYSTEM
  
 PROJECT REPORT
 Submitted to
@@ -65,38 +65,48 @@ The successful completion of this project titled “COLLEGE SPORTS MANAGEMENT SY
 I extend my heartfelt thanks to the Management and College Council of Gobi Arts & Science College (Autonomous), Gobichettipalayam, for providing the necessary facilities and granting me the opportunity to undertake this project work.
 I express my deep sense of gratitude to our respected Principal, Dr. P. Venugopal, M.Sc., M.Phil., PGDCA., Ph.D., and Vice Principal, Dr. M. Raju, M.A., M.Phil., Ph.D., for their encouragement and valuable support.
 I would like to place on record my profound gratitude to Dr. M. Ramalingam, M.Sc. (CS)., M.C.A., Ph.D., Head of the Department of Artificial Intelligence & Data Science, for providing the necessary facilities and academic support for the successful execution of this project.
-I owe my deepest gratitude to my project guide, Dr. M. Ramalingam, M.Sc. (CS)., M.C.A., Ph.D., Associate Professor, Department of Artificial Intelligence & Data Science, for his valuable guidance, constant supervision, and constructive suggestions throughout the development of the “CONTENTS
-CONTENTS
+I owe my deepest gratitude to my project guide, Dr. M. Ramalingam, M.Sc. (CS)., M.C.A., Ph.D., Associate Professor, Department of Artificial Intelligence & Data Science, for his valuable guidance, constant supervision, and constructive suggestions throughout the development of the College Sports Management System.
+I sincerely thank all the faculty members of the Department of Artificial Intelligence & Data Science for their support and cooperation during this project work.
+Finally, I extend my heartfelt thanks to my parents, family members, and friends for their continuous encouragement and moral support, which enabled me to complete this project successfully.
 
-ACKNOWLEDGEMENT 							I
-SYNOPSIS									II
-     CHAPTER	                             TITLE	            PAGE NO.
-1.	INTRODUCTION	              1
-	1.1 ABOUT THE PROJECT	
-	1.2 HARDWARE SPECIFICATION 	
-	1.3 SOFTWARE SPECIFICATION 	
-            2.	SYSTEM ANALYSIS	               8
-	2.1 PROBLEM DEFINITION	
-	2.2 SYSTEM STUDY	
-	2.3 PROPOSED SYSTEM	
-             3. 	SYSTEM DESIGN	              10
-	3.1 DATA FLOW DIAGRAM	
-	3.2 MODULE SPECIFICATION	
-             4.	TESTING AND IMPLEMENTATION	              15
-             5.	CONCLUSION AND SUGGESTONS	               17
-             6.	BIBILIOGRAPHY	               19
+DINESH D
 
-APPENDICES 
-APPENDICES-A (SCREEN FORMATES)
+---
 
-CHAPTER 1: INTRODUCTION
+## CONTENTS
 
-INTRODUCTION
+| Section | Title | Page No. |
+|---------|-------|----------|
+| | ACKNOWLEDGEMENT | I |
+| | SYNOPSIS | II |
+| 1. | INTRODUCTION | 1 |
+| | 1.1 About the Project | |
+| | 1.2 Hardware Specification | |
+| | 1.3 Software Specification | |
+| 2. | SYSTEM ANALYSIS | 8 |
+| | 2.1 Problem Definition | |
+| | 2.2 System Study | |
+| | 2.3 Proposed System | |
+| 3. | SYSTEM DESIGN | 10 |
+| | 3.1 Data Flow Diagram | |
+| | 3.2 E-R Diagram & Module Specification | |
+| 4. | TESTING AND IMPLEMENTATION | 15 |
+| 5. | CONCLUSION AND SUGGESTIONS | 17 |
+| 6. | BIBLIOGRAPHY | 19 |
+| | APPENDICES | |
+| | APPENDIX-A (Screen Formats) | |
+
+---
+
+## CHAPTER 1: INTRODUCTION
+
+### INTRODUCTION
 The College Sports Management System (CSMS) is a web-based management platform developed to modernize the complete operational workflow of a college Physical Education Department. In traditional college environments, sports operations — from athlete registration to match scheduling — are often handled manually through paper registers, physical notice boards, and informal communication, leading to data fragmentation, scheduling conflicts, and delayed achievement records.
 
 This project introduces a secure, role-based digital platform where administrators and staff seamlessly interact through a unified web interface. Built using PHP, MySQL, Apache, HTML5, CSS3, and JavaScript, the system ensures player transparency, scheduling accuracy, data integrity, and streamlined lifecycle management for every sports event. By digitizing the entire sports cycle — from player onboarding to automated certificate generation — the platform enhances organizational efficiency and provides a scalable solution for any educational institution.
 
-1.1 ABOUT THE PROJECT
+### 1.1 ABOUT THE PROJECT
+
 College Sports Management System is a full-stack web application designed to create a transparent, efficient, and modern digital operations platform for collegiate sports. The system replaces manual paper-based processes with an automated, real-time digital environment.
 
 Project Goals
@@ -105,48 +115,50 @@ Project Goals
 •	Ensure data integrity, performance tracking, and automated documentation (certificates) at every layer of the system.
 •	Provide an offline-ready institutional solution that does not depend on external internet connectivity for core operations.
 
-Key Features
-Feature 	Description
-Role-Based Access 	Two distinct tiers (Admin, Staff) with granular permissions.
-Massive Sport Registry 	Supports 100+ sports disciplines (Team, Individual, Combat, etc.).
-Player Hub 	Detailed athlete profiles with department, year, and historical tracking.
-Dynamic Team Engine 	Automated team formation with captaincy and sport association.
-Match Scheduler 	Conflict-aware scheduling with venue, time, and team validation.
-Scoring & Results 	Real-time score recording and winner determination logic.
-Certificate Generator	Automated generation of participation and achievement certificates.
-Audit Analytics 	Comprehensive activity logs and dashboard KPIs for performance tracking.
-Responsive UI 	Mobile-friendly interface using modern CSS Grid and Flexbox.
+*Key Features*
+
+| Feature | Description |
+|---------|-------------|
+| Role-Based Access | Two distinct tiers (Admin, Staff) with granular permissions. |
+| Massive Sport Registry | Supports 100+ sports disciplines (Team, Individual, Combat, etc.). |
+| Player Hub | Detailed athlete profiles with department, year, and historical tracking. |
+| Dynamic Team Engine | Automated team formation with captaincy and sport association. |
+| Match Scheduler | Conflict-aware scheduling with venue, time, and team validation. |
+| Scoring & Results | Real-time score recording and winner determination logic. |
+| Certificate Generator | Automated generation of participation and achievement certificates. |
+| Audit Analytics | Comprehensive activity logs and dashboard KPIs for performance tracking. |
+| Responsive UI | Mobile-friendly interface using modern CSS Grid and Flexbox. |
 
 Platform URL (Local)
 http://localhost/COLLEGE-SPORTS-MANAGEMENT-SYSTEM/
 
-1.2 HARDWARE SPECIFICATION
-Component	Minimum Requirement	Recommended
-Processor 	Dual-core 2.0 GHz 	Intel Core i5/i7 (3.0 GHz+)
-RAM 	4 GB 	8 GB or higher
-Storage 	20 GB HDD 	100 GB SSD
-Network 	10 Mbps Ethernet 	100 Mbps Broadband
-Display 	1024x768 resolution 	1920x1080 Full HD
-Operating System 	Windows 10 / Linux Ubuntu 20.04 	Windows 11 / Ubuntu 22.04 LTS
+### 1.2 HARDWARE SPECIFICATION
 
-1.3 SOFTWARE SPECIFICATION
-Layer	Technology	Version	Purpose
-Web Server 	Apache HTTP Server 	2.4+ 	Request routing and static asset delivery
-Backend Language 	PHP 	8.2+ 	Server-side business logic and API handling
-Database 	MySQL / MariaDB 	5.7+ / 10.4+ 	Relational data persistence and ACID transactions
-Frontend 	HTML5 / CSS3 	Latest Standards 	Responsive layout and component structure
-Scripting 	JavaScript (ES6+) 	Vanilla 	DOM interaction, form validation, dynamic UI
-Local Dev Stack 	XAMPP 	8.2.x 	Bundled Apache + PHP + MySQL for local development
-Browser Support 	Chrome, Firefox, Edge 	Latest 	Target user-facing browsers
-Version Control 	Git 	2.x 	Source code management
-College Sports Management System.”
-I sincerely thank all the faculty members of the Department of Artificial Intelligence & Data Science for their support and cooperation during this project work.
-Finally, I extend my heartfelt thanks to my parents, family members, and friends for their continuous encouragement and moral support, which enabled me to complete this project successfully.
+| Component | Minimum Requirement | Recommended |
+|-----------|---------------------|-------------|
+| Processor | Dual-core 2.0 GHz | Intel Core i5/i7 (3.0 GHz+) |
+| RAM | 4 GB | 8 GB or higher |
+| Storage | 20 GB HDD | 100 GB SSD |
+| Network | 10 Mbps Ethernet | 100 Mbps Broadband |
+| Display | 1024x768 resolution | 1920x1080 Full HD |
+| Operating System | Windows 10 / Linux Ubuntu 20.04 | Windows 11 / Ubuntu 22.04 LTS |
 
-DINESH D
+### 1.3 SOFTWARE SPECIFICATION
 
-                                                               SYNOPSIS
-SYNOPSIS
+| Layer | Technology | Version | Purpose |
+|-------|------------|---------|---------|
+| Web Server | Apache HTTP Server | 2.4+ | Request routing and static asset delivery |
+| Backend Language | PHP | 8.2+ | Server-side business logic and API handling |
+| Database | MySQL / MariaDB | 5.7+ / 10.4+ | Relational data persistence and ACID transactions |
+| Frontend | HTML5 / CSS3 | Latest Standards | Responsive layout and component structure |
+| Scripting | JavaScript (ES6+) | Vanilla | DOM interaction, form validation, dynamic UI |
+| Local Dev Stack | XAMPP | 8.2.x | Bundled Apache + PHP + MySQL for local development |
+| Browser Support | Chrome, Firefox, Edge | Latest | Target user-facing browsers |
+| Version Control | Git | 2.x | Source code management |
+
+---
+
+## SYNOPSIS
 
 The College Sports Management System (CSMS) is a production-ready, web-based platform developed to modernize and digitize the complete operational lifecycle of a college's Physical Education Department. Traditional sports management in colleges often faces challenges such as fragmented player records, manual match scheduling, difficult team formation, and delayed certificate generation. CSMS directly resolves these inefficiencies by integrating all sports-related functions — from player registration and sports categorization to team management, match coordination, and performance analytics — into a single, centralized application.
 
@@ -160,9 +172,12 @@ This report documents the complete software engineering lifecycle of the project
 
 ---
 
-                                                    CHAPTER 2 — SYSTEM ANALYSIS
+---
 
-2.1 Problem Definition
+## CHAPTER 2 — SYSTEM ANALYSIS
+
+### ### 2.1 Problem Definition
+
 In many colleges, the Physical Education (PE) Department still relies on manual and semi-digital processes for managing sports activities. Player registrations are collected on paper forms, team lists are maintained in spreadsheets, fixtures are published on notice boards, and performance records are scattered across files. This leads to several operational challenges:
 1.	Fragmented Player Records — Student-athlete details, eligibility, and participation history are not centralized, making it difficult to track long-term performance.
 2.	Manual Team Formation — Coaches and staff manually create teams, often repeating data entry and risking selection errors or missing players.
@@ -172,29 +187,33 @@ In many colleges, the Physical Education (PE) Department still relies on manual 
 6.	Time-Consuming Certificate Preparation — Generating participation and achievement certificates is a manual, repetitive task that consumes significant staff time.
 7.	Lack of Analytics — There is no consolidated dashboard to view key statistics such as total players, active teams, completed matches, and overall participation trends.
 
-2.2 System Study
-Existing Approach vs Limitations
+### 2.2 System Study
 
-Existing Approach	        Limitation
-Paper-Based Registers		Data is hard to search, prone to loss and physical damage.
-Spreadsheet-Based Lists		No relational integrity; difficult to maintain consistency across sheets.
-Notice-Board Scheduling		No automated conflict detection; updates require re-printing schedules.
-Manual Certificates		High effort for every tournament; human errors in names and events.
-Informal Communication		Important information may not reach all stakeholders in time.
+*Existing Approach vs Limitations*
 
-Stakeholder Analysis
+| Existing Approach | Limitation |
+|-------------------|------------|
+| Paper-Based Registers | Data is hard to search, prone to loss and physical damage. |
+| Spreadsheet-Based Lists | No relational integrity; difficult to maintain consistency across sheets. |
+| Notice-Board Scheduling | No automated conflict detection; updates require re-printing schedules. |
+| Manual Certificates | High effort for every tournament; human errors in names and events. |
+| Informal Communication | Important information may not reach all stakeholders in time. |
 
-Stakeholder	Role	                 Key Needs
-Administrator	System Owner	        Complete control over users, sports catalog, teams, and audit logs.
-Staff	        Operations Executor	Quick tools for player registration, team creation, match scheduling, score entry, and certificate generation.
-Students/Players	Participants	Accurate representation of participation and achievements (through generated certificates).
-Institution Management	Decision Makers	Consolidated reporting to understand engagement, infrastructure needs, and success metrics.
+*Stakeholder Analysis*
+
+| Stakeholder | Role | Key Needs |
+|-------------|------|-----------|
+| Administrator | System Owner | Complete control over users, sports catalog, teams, and audit logs. |
+| Staff | Operations Executor | Quick tools for player registration, team creation, match scheduling, score entry, and certificate generation. |
+| Students/Players | Participants | Accurate representation of participation and achievements (through generated certificates). |
+| Institution Management | Decision Makers | Consolidated reporting to understand engagement, infrastructure needs, and success metrics. |
 
 System Boundaries
 •	In Scope: User management (Admin/Staff), sports category management, player registry, team formation, match scheduling, score and result recording, basic player performance logging, certificate generation, and activity logging.
 •	Out of Scope: Online public portal, mobile applications, fee/payment collection, advanced performance analytics using AI, and integration with external federations.
 
-2.3 Proposed System
+### 2.3 Proposed System
+
 The proposed College Sports Management System replaces fragmented manual workflows with a centralized, role-based web application hosted on the institutional intranet.
 
 Key Characteristics of the Proposed System:
@@ -214,9 +233,12 @@ Benefits Over Existing Approach:
 
 
 
-                                                    CHAPTER 3 — SYSTEM DESIGN
+---
 
-3.1 Data Flow Diagram (DFD)
+## CHAPTER 3 — SYSTEM DESIGN
+
+### ### 3.1 Data Flow Diagram (DFD)
+
 The logical flow of data in CSMS can be represented with the following levels:
 
 DFD Level 0 — Context Diagram
@@ -237,7 +259,8 @@ DFD Level 2 — Match Management Sub-process
 •	Schedule Match → Validate Teams & Venue → Save Match → Update Dashboard.
 •	Enter Scores → Calculate Outcome → Update Standings → Generate Result Logs.
 
-3.2 E–R Diagram (Conceptual Overview)
+### 3.2 E–R Diagram (Conceptual Overview)
+
 The high-level entity-relationship view of the system includes the following entities and relationships:
 •	Users (Admin/Staff)
 •	Players
@@ -259,82 +282,97 @@ Relationships (Simplified):
 •	One Match has one Match Result and many Player Performance records.
 •	One Player can own many Certificates.
 
-3.3 File Specification
+### 3.3 File Specification
+
 This section documents the key physical components of the CSMS application.
 
-Root-Level Files
-File	        Type	Purpose
-index.php	PHP	Login portal and entry point for Admin and Staff.
-logout.php	PHP	Secure session termination and redirect to login.
-config.php	PHP	Global configuration: database connection, helper functions, paths, and security utilities.
-README.md	Markdown	Developer-facing overview and installation guide.
-SCREENSHOT_README.md	Markdown	Technical guide for automated screenshot capture.
+*Root-Level Files*
 
-Configuration & Shared Components
-Directory/File	        Purpose
-includes/header.php	Common HTML header, top-bar, CSS/JS references, and session context.
-includes/sidebar.php	Left navigation sidebar (role-aware menus for Admin and Staff).
-includes/footer.php	Common footer and closing script references.
-includes/icons.php	Application-wide icon registry used for dashboards and UI elements.
-includes/team_helpers.php	Helper functions for team and roster rendering.
+| File | Type | Purpose |
+|------|------|---------|
+| index.php | PHP | Login portal and entry point for Admin and Staff. |
+| logout.php | PHP | Secure session termination and redirect to login. |
+| config.php | PHP | Global configuration: database connection, helper functions, paths, and security utilities. |
+| README.md | Markdown | Developer-facing overview and installation guide. |
+| SCREENSHOT_README.md | Markdown | Technical guide for automated screenshot capture. |
 
-Application Modules
-Directory/File	        Role/Purpose
-admin/dashboard.php	Admin dashboard with KPI cards, analytics bento grid, and real-time stats fetched via API.
-admin/manage_users.php	User management: create, edit, delete admin/staff accounts.
-admin/add_user.php	Form interface for creating new admin/staff users.
-admin/manage_sports.php	Listing and management of sports categories.
-admin/add_sport.php	Form to add new sports disciplines with emoji/icon metadata.
-admin/manage_teams.php	Team listing with sport association.
-admin/add_team.php	Team creation with coach assignment.
-admin/team_roster.php	View and manage players in a given team.
-admin/manage_players.php	Complete player registry overview.
-admin/add_player.php	Player registration form.
-admin/manage_matches.php	Match list for all sports.
-admin/schedule_match.php	Fixture creation interface (sport, teams, venue, date, time).
-admin/view_results.php	Consolidated view of completed match results.
-admin/enter_results.php	Score entry screen post-match.
-admin/reports.php	Summary reports across players, teams, and matches.
-admin/analytics.php	Advanced analytics and participation charts.
-admin/performance_tracking.php	Player performance tracking view.
-admin/player_statistics.php	Detailed statistics per player.
-admin/calendar.php	Calendar-based schedule view.
-admin/notifications.php	Notifications center for system or match-related alerts.
-admin/generate_certificate.php	Certificate generation interface for Admin.
-admin/profile.php	Admin profile view and personal settings.
-admin/settings.php	System-level configuration settings.
+*Configuration & Shared Components*
 
-staff/dashboard.php	Staff dashboard with role-specific KPIs and upcoming matches.
-staff/view_teams.php	View list of active teams.
-staff/team_roster.php	View team membership and player details.
-staff/view_players.php	View registered players.
-staff/view_player.php	Detailed single-player profile.
-staff/view_matches.php	View scheduled matches.
-staff/view_results.php	View finalized match results.
-staff/enter_scores.php	Score-entry interface restricted to Staff.
-staff/view_reports.php	Staff-facing reports.
-staff/generate_certificate.php	Staff-side certificate generation (as delegated by Admin).
-staff/profile.php	Staff profile view.
-staff/settings.php	Staff-side settings.
+| Directory/File | Purpose |
+|----------------|---------|
+| includes/header.php | Common HTML header, top-bar, CSS/JS references, and session context. |
+| includes/sidebar.php | Left navigation sidebar (role-aware menus for Admin and Staff). |
+| includes/footer.php | Common footer and closing script references. |
+| includes/icons.php | Application-wide icon registry used for dashboards and UI elements. |
+| includes/team_helpers.php | Helper functions for team and roster rendering. |
 
-API Endpoints
-Directory/File	                Purpose
-api/get_dashboard_stats.php	Provides JSON statistics for dashboards (counts of players, teams, sports, matches).
-api/search.php	                AJAX search endpoint for players, teams, or sports.
-api/get_teams.php	        Returns team lists for dropdowns or asynchronous UI components.
-api/notifications.php	        Returns notification data for Admin and Staff dashboards.
+*Application Modules (Admin)*
 
-Database & Assets
-Directory/File	                Purpose
-database/sports_management.sql	Primary database schema and seed data (11 normalized tables and 100+ sports).
-assets/css/*	                Application stylesheets (variables, layout, typography, dashboard UI).
-assets/js/*	                Frontend interaction scripts.
-assets/images/*	                Logos, avatars, sport icons, and illustrations.
-assets/uploads/*	        Uploaded photos for users and players.
-assets/screenshots/viewport/*	Viewport screenshots for documentation.
-assets/screenshots/full-height/*	Full-height screenshots for documentation.
+| Directory/File | Role/Purpose |
+|----------------|--------------|
+| admin/dashboard.php | Admin dashboard with KPI cards, analytics bento grid, and real-time stats fetched via API. |
+| admin/manage_users.php | User management: create, edit, delete admin/staff accounts. |
+| admin/add_user.php | Form interface for creating new admin/staff users. |
+| admin/manage_sports.php | Listing and management of sports categories. |
+| admin/add_sport.php | Form to add new sports disciplines with emoji/icon metadata. |
+| admin/manage_teams.php | Team listing with sport association. |
+| admin/add_team.php | Team creation with coach assignment. |
+| admin/team_roster.php | View and manage players in a given team. |
+| admin/manage_players.php | Complete player registry overview. |
+| admin/add_player.php | Player registration form. |
+| admin/manage_matches.php | Match list for all sports. |
+| admin/schedule_match.php | Fixture creation interface (sport, teams, venue, date, time). |
+| admin/view_results.php | Consolidated view of completed match results. |
+| admin/enter_results.php | Score entry screen post-match. |
+| admin/reports.php | Summary reports across players, teams, and matches. |
+| admin/analytics.php | Advanced analytics and participation charts. |
+| admin/performance_tracking.php | Player performance tracking view. |
+| admin/player_statistics.php | Detailed statistics per player. |
+| admin/calendar.php | Calendar-based schedule view. |
+| admin/notifications.php | Notifications center for system or match-related alerts. |
+| admin/generate_certificate.php | Certificate generation interface for Admin. |
+| admin/profile.php | Admin profile view and personal settings. |
+| admin/settings.php | System-level configuration settings. |
 
-3.4 Database Table Specifications
+*Application Modules (Staff)*
+
+| Directory/File | Role/Purpose |
+|----------------|--------------|
+| staff/dashboard.php | Staff dashboard with role-specific KPIs and upcoming matches. |
+| staff/view_teams.php | View list of active teams. |
+| staff/team_roster.php | View team membership and player details. |
+| staff/view_players.php | View registered players. |
+| staff/view_player.php | Detailed single-player profile. |
+| staff/view_matches.php | View scheduled matches. |
+| staff/view_results.php | View finalized match results. |
+| staff/enter_scores.php | Score-entry interface restricted to Staff. |
+| staff/view_reports.php | Staff-facing reports. |
+| staff/generate_certificate.php | Staff-side certificate generation (as delegated by Admin). |
+| staff/profile.php | Staff profile view. |
+| staff/settings.php | Staff-side settings. |
+
+*API Endpoints*
+
+| Directory/File | Purpose |
+|----------------|---------|
+| api/get_dashboard_stats.php | Provides JSON statistics for dashboards (counts of players, teams, sports, matches). |
+| api/search.php | AJAX search endpoint for players, teams, or sports. |
+| api/get_teams.php | Returns team lists for dropdowns or asynchronous UI components. |
+| api/notifications.php | Returns notification data for Admin and Staff dashboards. |
+
+*Database & Assets*
+
+| Directory/File | Purpose |
+|----------------|---------|
+| database/sports_management.sql | Primary database schema and seed data (11 normalized tables and 100+ sports). |
+| assets/css/* | Application stylesheets (variables, layout, typography, dashboard UI). |
+| assets/js/* | Frontend interaction scripts. |
+| assets/images/* | Logos, avatars, sport icons, and illustrations. |
+| assets/uploads/* | Uploaded photos for users and players. |
+| assets/screenshots/viewport/* | Viewport screenshots for documentation. |
+
+### 3.4 Database Table Specifications
+
 The CSMS database consists of 11 core tables in the `sports_management` schema. The following specifications summarize their structure and purpose.
 
 1. Table: users
@@ -519,7 +557,8 @@ Purpose: Maintains an institutional audit trail of all core operations.
 | ip_address  | VARCHAR(45)  | YES  | –   | NULL              | IP address of the actor.                           |
 | created_at  | TIMESTAMP    | YES  | –   | CURRENT_TIMESTAMP | Log timestamp.                                     |
 
-3.5 Module Specification
+### 3.5 Module Specification
+
 The CSMS is implemented using a modular architecture. Each module encapsulates a specific business domain.
 
 Module 1: Authentication & Authorization
@@ -588,9 +627,11 @@ Key Features:
 •	Activity log views for administrators to review create/update/delete events.
 
 
-                                                    CHAPTER 4 — TESTING AND IMPLEMENTATION
+---
 
-4.1 System Testing
+## CHAPTER 4 — TESTING AND IMPLEMENTATION
+
+### 4.1 System Testing
 Testing of CSMS was conducted at multiple levels to ensure correctness, robustness, and security.
 
 4.1.1 Unit Testing
@@ -660,9 +701,11 @@ UAT was conducted with representative users from the PE Department.
 Feedback received was positive, with minor UI refinements incorporated into the final iteration (e.g., improved icons, clearer labels, and enhanced dashboard texts).
 
 
-                                                    CHAPTER 5 — CONCLUSION AND SUGGESTIONS
+---
 
-5.1 Conclusion
+## CHAPTER 5 — CONCLUSION AND SUGGESTIONS
+
+### 5.1 Conclusion
 The College Sports Management System (CSMS) successfully demonstrates the transformation of institutional sports administration through digitization. By centralizing player data, automating match scheduling, and providing instant certificate generation, the system eliminates traditional friction points and provides a professional digital backbone for the Department of Physical Education.
 
 Key Achievements:
@@ -680,9 +723,11 @@ Key Achievements:
 5.	Student Portal Extension: Extend the system with a student-facing portal for viewing personal performance dashboards and certificate history.
 
 
-BIBLIOGRAPHY
+---
 
-6.1 Books and Publications
+## BIBLIOGRAPHY
+
+### 6.1 Books and Publications
 •	Lockhart, J. (2015). Modern PHP: New Features and Good Practices. O'Reilly Media.
 •	Nixon, R. (2021). Learning PHP, MySQL & JavaScript: With jQuery, CSS & HTML5. O'Reilly Media.
 •	Ullman, L. (2014). PHP and MySQL for Dynamic Web Sites. Peachpit Press.
@@ -693,10 +738,13 @@ BIBLIOGRAPHY
 •	MDN Web Docs: https://developer.mozilla.org/
 
 
-APPENDICES
-APPENDIX – A (Screen Formats)
+---
 
-A.1 Authentication Page
+## APPENDICES
+
+### APPENDIX – A (Screen Formats)
+
+#### A.1 Authentication Page
 01. Login Page — index.php
 
 Viewport Screenshot:
@@ -705,8 +753,9 @@ Viewport Screenshot:
 Description: The public entry point for CSMS. Displays institutional branding, username and password fields, error alerts, and role-based redirect logic after successful authentication.
 
 
-A.2 Administrator Pages (Admin Role)
-Login Credentials for Testing: admin / password
+#### A.2 Administrator Pages (Admin Role)
+
+Login Credentials for Testing: `admin` / `password`
 
 02. Admin Dashboard — admin/dashboard.php
 Viewport: ![Admin Dashboard — Viewport](../assets/screenshots/viewport/02-admin-dashboard.png)
@@ -805,8 +854,9 @@ Viewport: ![Admin Settings — Viewport](../assets/screenshots/viewport/25-admin
 Description: System configuration screen to manage global options such as branding, time zone, and other ready-only technical parameters.
 
 
-A.3 Staff Pages (Staff Role)
-Login Credentials for Testing: staff / password
+#### A.3 Staff Pages (Staff Role)
+
+Login Credentials for Testing: `staff` / `password`
 
 26. Staff Dashboard — staff/dashboard.php
 Viewport: ![Staff Dashboard — Viewport](../assets/screenshots/viewport/26-staff-dashboard.png)

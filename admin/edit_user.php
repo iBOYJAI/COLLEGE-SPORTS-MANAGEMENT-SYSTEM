@@ -80,10 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         if (!empty($password)) {
             $hashed = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $conn->prepare("UPDATE users SET full_name = ?, username = ?, email = ?, gender = ?, password = ?, role = ?, status = ?, phone = ?, photo = ?, updated_at = NOW() WHERE id = ?");
+            $stmt = $conn->prepare("UPDATE users SET full_name = ?, username = ?, email = ?, gender = ?, password = ?, role = ?, status = ?, mobile = ?, photo = ?, updated_at = NOW() WHERE id = ?");
             $stmt->bind_param("sssssssssi", $full_name, $username, $email, $gender, $hashed, $role, $status, $phone, $photo_path, $user_id);
         } else {
-            $stmt = $conn->prepare("UPDATE users SET full_name = ?, username = ?, email = ?, gender = ?, role = ?, status = ?, phone = ?, photo = ?, updated_at = NOW() WHERE id = ?");
+            $stmt = $conn->prepare("UPDATE users SET full_name = ?, username = ?, email = ?, gender = ?, role = ?, status = ?, mobile = ?, photo = ?, updated_at = NOW() WHERE id = ?");
             $stmt->bind_param("ssssssssi", $full_name, $username, $email, $gender, $role, $status, $phone, $photo_path, $user_id);
         }
 
@@ -164,7 +164,7 @@ include '../includes/sidebar.php';
 
                             <div class="premium-field">
                                 <label class="field-label">Contact Number</label>
-                                <input type="tel" name="phone" class="premium-input" value="<?php echo htmlspecialchars($user['phone']); ?>">
+                                <input type="tel" name="phone" class="premium-input" value="<?php echo htmlspecialchars($user['mobile'] ?? ''); ?>">
                             </div>
                         </div>
 
