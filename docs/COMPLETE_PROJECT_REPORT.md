@@ -400,23 +400,24 @@ The administrator manages the system through a comprehensive dashboard and user 
 A.3 Sports and Teams
 ![Manage Sports](../assets/screenshots/viewport/05-admin-manage-sports.png)
 ![Manage Teams](../assets/screenshots/viewport/07-admin-manage-teams.png)
+![Certificate Generation](../assets/screenshots/viewport/23-admin-generate-certificate.png)
 Administrators can configure the sports catalog and organize players into formal teams.
 
 A.4 Players and Matches
 ![Manage Players](../assets/screenshots/viewport/10-admin-manage-players.png)
-![Manage Matches](../assets/screenshots/viewport/20-admin-manage-matches.png)
+![Manage Matches](../assets/screenshots/viewport/13-admin-manage-matches.png)
 The system tracks player enrollments and schedules sports fixtures across various venues.
 
 APPENDIX – B (REPORT FORMS)
 
 Report 1: Tournament Analytics
-![Report 1](../assets/screenshots/viewport/27-admin-reports.png)
+![Report 1](../assets/screenshots/viewport/17-admin-reports.png)
 
 Report 2: Performance Tracking
-![Report 2](../assets/screenshots/viewport/28-admin-analytics.png)
+![Report 2](../assets/screenshots/viewport/19-admin-performance-tracking.png)
 
 Report 3: Participation Data
-![Report 3](../assets/screenshots/viewport/26-admin-performance-tracking.png)
+![Report 3](../assets/screenshots/viewport/18-admin-analytics.png)
 
 Report 4: Athlete Statistics
-![Report 4](../assets/screenshots/viewport/29-admin-player-statistics.png)
+![Report 4](../assets/screenshots/viewport/20-admin-player-statistics.png)
