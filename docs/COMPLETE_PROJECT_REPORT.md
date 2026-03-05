@@ -103,6 +103,10 @@ A.2 Admin Dashboard and Users 42
 A.3 Sports and Teams 44
 A.4 Players and Matches 46
 APPENDIX – B (REPORT FORMS) 48
+Report 1: Tournament Analytics 48
+Report 2: Performance Tracking 49
+Report 3: Participation Data 50
+Report 4: Athlete Statistics 51
 
 CHAPTER 1: INTRODUCTION
 
