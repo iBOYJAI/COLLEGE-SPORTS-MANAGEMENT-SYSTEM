@@ -394,7 +394,7 @@ The authentication portal provides secure role based access for administrators a
 
 A.2 Admin Dashboard and Users
 ![Admin Dashboard](../assets/screenshots/viewport/02-admin-dashboard.png)
-![Manage Users](../assets/screenshots/viewport/03-admin-manage-users.png)
+![Manage Users](../assets/screenshots/viewport/04-admin-add-user.png)
 The administrator manages the system through a comprehensive dashboard and user registry.
 
 A.3 Sports and Teams
