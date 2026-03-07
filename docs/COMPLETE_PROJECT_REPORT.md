@@ -128,6 +128,23 @@ CHAPTER	TITLE	PAGE NO.
 	  B2. Performance Tracking	30
 	  B3. Participation Data	31
 	  B4. Athlete Statistics	32
+	APPENDIX – C (CODE ALGORITHMS EXAMPLES)	33
+	  C1. Core Data Sanitization Helper	33
+	  C2. Real-time Match Conflict Detection	33
+	  C3. Secure Authentication & Hashing	33
+	  C4. Role-Based Access Validation	34
+	  C5. Institutional Activity Logging	34
+	  C6. Dynamic Analytics & KPI Tallying	34
+	  C7. Certificate Generation Engine	35
+	  C8. Automated File Upload Logic	35
+	  C9. Team Performance Update Logic	35
+	  C10. AJAX-Based Search & Filter	36
+	  C11. Secure Session Management	36
+	  C12. Database Connection Wrapper	36
+	  C13. Database Schema (SQL Definition)	37
+	  C14. Advanced Search & Pagination	37
+	  C15. CSS Design System	38
+	  C16. CSRF Security Token Logic	38
 
  
 1. INTRODUCTION
