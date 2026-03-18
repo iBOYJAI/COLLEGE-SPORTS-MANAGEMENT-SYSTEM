@@ -93,7 +93,7 @@ include '../includes/sidebar.php';
             </div>
 
             <div style="display:flex; align-items: center; gap: 20px;">
-                <a href="manage_teams.php" class="btn-reset-light" style="color: white; border-color: rgba(255,255,255,0.2);">
+                <a href="manage_teams.php" class="btn-reset-light" style="background: transparent; color: white; border: 1px solid rgba(255,255,255,0.2);">
                     Discard Changes
                 </a>
                 <button type="submit" form="assignment-form" class="elite-action-btn">
@@ -315,16 +315,25 @@ include '../includes/sidebar.php';
         // Card Click Handler
         cards.forEach(card => {
             const checkbox = card.querySelector('.player-checkbox');
+
+            // Handle clicks anywhere on the card consistently
             card.addEventListener('click', function(e) {
-                // Prevent double trigger if clicking directly on checkbox (though it's hidden)
-                if (e.target.type !== 'checkbox') {
-                    checkbox.checked = !checkbox.checked;
-                    card.classList.toggle('active', checkbox.checked);
-                    updateCount();
-                }
+                // Prevent label's default toggle so we control state once
+                e.preventDefault();
+
+                // Toggle checkbox manually
+                checkbox.checked = !checkbox.checked;
+                card.classList.toggle('active', checkbox.checked);
+                updateCount();
             });
 
-            // Sync initial state
+            // Also handle direct checkbox changes (keyboard navigation, etc.)
+            checkbox.addEventListener('change', function() {
+                card.classList.toggle('active', checkbox.checked);
+                updateCount();
+            });
+
+            // Sync initial state on load
             if (checkbox.checked) {
                 card.classList.add('active');
             }

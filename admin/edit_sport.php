@@ -160,7 +160,7 @@ include '../includes/sidebar.php';
 
                             <div class="premium-field" style="margin-top: 10px;">
                                 <label class="field-label">Brief Narrative</label>
-                                <textarea name="description" class="premium-input" rows="3" style="resize: none;"><?php echo htmlspecialchars($sport['description']); ?></textarea>
+                                <textarea name="description" class="premium-input" rows="3" style="resize: none;"><?php echo htmlspecialchars($sport['description'] ?? ''); ?></textarea>
                             </div>
                         </div>
                     </div>

@@ -8,8 +8,18 @@
  * No external dependencies or CDN links allowed
  */
 
-// Start session if not already started
+// Start session if not already started (with extended lifetime)
 if (session_status() === PHP_SESSION_NONE) {
+    // Extend session cookie lifetime (8 hours)
+    $lifetime = 8 * 60 * 60;
+    session_set_cookie_params([
+        'lifetime' => $lifetime,
+        'path'     => '/',
+        'secure'   => false, // set true if you serve over HTTPS
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
+
     session_start();
 }
 

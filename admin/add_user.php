@@ -53,8 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         $hashed = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $conn->prepare("INSERT INTO users (full_name, username, email, gender, password, role, status, phone, photo, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
-        $stmt->bind_param("sssssssss", $full_name, $username, $email, $gender, $hashed, $role, $status, $phone, $photo_path);
+        // Note: Phone field is optional and may not exist in older databases.
+        // Insert only into columns guaranteed to exist in the schema.
+        $stmt = $conn->prepare("INSERT INTO users (full_name, username, email, gender, password, role, status, photo, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+        $stmt->bind_param("ssssssss", $full_name, $username, $email, $gender, $hashed, $role, $status, $photo_path);
 
         if ($stmt->execute()) {
             $new_id = $stmt->insert_id;
